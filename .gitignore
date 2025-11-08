@@ -1,0 +1,4 @@
+# Ignore tous les fichiers relatifs à .NET
+Cs/* 
+!Cs/main
+!Cs/main.cs
