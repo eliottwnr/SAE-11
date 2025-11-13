@@ -4,11 +4,12 @@ using System;
 partial class Programme { // partial permet de séparer en plusieurs fichiers une même classe
     public static void Main(){
         uint[] date = saisirDate();
-        string[] horaires;
+        string[] horairesDuJour;
+        uint[] horaire;
 
         Liaison liaison = saisirLiaison();
         
-        horairesJour(liaison, date[0], out horaires); // date[0] correspond au jour
-        afficherHoraires(horaires); 
+        horairesJour(liaison, date[0], out horairesDuJour); // date[0] correspond au jour
+        horaire = saisirHoraire(horairesDuJour); 
     }
 }

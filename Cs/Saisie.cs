@@ -24,7 +24,8 @@ partial class Programme {
         return (Liaison) liaison; // cast (conversion) vers l'énumération
     }
 
-    // permet de saisir des dates en novembre 2025 (mais modifiable)
+    // permet de saisir des dates en novembre 2025 (mais modifiable) 
+    // prompt différent à chaque fois donc pas d'appel d'une fonction d'affichage
     static uint[] saisirDate(){
         uint[] date = new uint[3]; // jour, mois, année
 
@@ -64,5 +65,32 @@ partial class Programme {
         } while (date[2] != 2025); // tant que le mois n'est pas 2025 
 
         return date;
+    }
+
+    static uint[] saisirHoraire(string[] horaires){
+        uint[] heure = new uint[2]; // heures, minutes
+        int nbHoraires;
+
+        bool saisieJuste;
+        string? saisie;
+        uint horaireSaisie;
+
+        afficherHoraires(horaires);
+        nbHoraires = horaires.Length;
+
+        do {
+            afficherPrompt();
+            saisie = Console.ReadLine();
+            saisieJuste = uint.TryParse(saisie, out horaireSaisie);
+
+            if (horaireSaisie <= 0 || horaireSaisie > nbHoraires){
+                afficherSaisieIncorrecte();
+            }
+        } while (horaireSaisie <= 0 || horaireSaisie > nbHoraires);
+
+        heure[0] = uint.Parse(horaires[horaireSaisie - 1].Split(':')[0]); // sélectionne la première partie du bon horaire 
+        heure[1] = uint.Parse(horaires[horaireSaisie - 1].Split(':')[1]); // sélectionne la seconde partie du bon horaire 
+
+        return heure;
     }
 }
