@@ -9,22 +9,15 @@ partial class Programme {
         string? saisie; // string? : string qui peut être null (au cas où aucune saisie)
         bool saisieJuste;
 
-        Console.Clear(); // nettoie la console
-        Console.WriteLine("-- Choix de la liaison --\n\n");
-
-        Console.WriteLine("   Départ\t-\tArrivée\n");
-        Console.WriteLine("1. Groix\t-\tLorient");
-        Console.WriteLine("2. Lorient\t-\tGroix");
-        Console.WriteLine("3. Le Palais\t-\tQuiberon");
-        Console.WriteLine("4. Quiberon\t-\tLe Palais");
+        afficherLiaisons();
 
         do {
-            Console.Write("--> "); // prompt
+            afficherPrompt();
             saisie = Console.ReadLine();
             saisieJuste = uint.TryParse(saisie, out liaison);
 
             if (!saisieJuste || (liaison != 1 && liaison != 2 && liaison != 3 && liaison != 4)){
-                Console.WriteLine("Saisie Incorrecte !");
+                afficherSaisieIncorrecte();
             }
         } while (liaison != 1 && liaison != 2 && liaison != 3 && liaison != 4);
 
@@ -39,13 +32,14 @@ partial class Programme {
         bool saisieJuste;
 
         Console.Clear(); // nettoie la console
+        Console.WriteLine("-- Saisie de la date --\n\n");
         do {
             Console.Write("Saisir le jour de la traversée : ");
             saisie = Console.ReadLine();
             saisieJuste = uint.TryParse(saisie, out date[0]);
 
             if (!saisieJuste || date[0] <= 0 || date[0] >= 31){
-                Console.WriteLine("Saisie Incorrecte !");
+                afficherSaisieIncorrecte();
             }
         } while (date[0] <= 0 || date[0] >= 31); // tant que le jour n'est pas entre 1 et 30 (inclus)
 
@@ -55,7 +49,7 @@ partial class Programme {
             saisieJuste = uint.TryParse(saisie, out date[1]);
 
             if (!saisieJuste || date[1] != 11){
-                Console.WriteLine("Saisie Incorrecte !");
+                afficherSaisieIncorrecte();
             }
         } while (date[1] != 11); // tant que le mois n'est pas en novembre 
 
@@ -65,7 +59,7 @@ partial class Programme {
             saisieJuste = uint.TryParse(saisie, out date[2]);
 
             if (!saisieJuste || date[2] != 2025){
-                Console.WriteLine("Saisie Incorrecte !");
+                afficherSaisieIncorrecte();
             }
         } while (date[2] != 2025); // tant que le mois n'est pas 2025 
 

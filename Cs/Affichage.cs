@@ -2,42 +2,36 @@ using System;
 
 // S'occupe de tout l'affichage 
 partial class Programme {
-    static void afficherLiaison(Liaison liaison){
-        switch (liaison){
-            case Liaison.lorient_groix: 
-                Console.WriteLine("Lorient - Groix");
-                break;
-                
-            case Liaison.groix_lorient:
-                Console.WriteLine("Groix - Lorient");
-                break;
+    static void afficherPrompt(){
+        Console.Write("--> ");
+    }
 
-            case Liaison.quiberon_lepalais: 
-                Console.WriteLine("Quiberon - Le Palais");
-                break;
+    static void afficherSaisieIncorrecte(){
+        Console.WriteLine("Saisie incorrecte !");
+    }
 
-            case Liaison.lepalais_quiberon: 
-                Console.WriteLine("Le Palais - Quiberon");
-                break;
+    static void afficherLiaisons(){
+        Console.Clear(); // nettoie la console
+        Console.WriteLine("-- Choix de la liaison --\n\n");
 
-            default: // rien besoin de mettre puisque liaison est forcément entre 1 et 4 (Vérifié lors de la saisie)
-                break;
-        }
+        Console.WriteLine("   Départ\t-\tArrivée\n");
+        Console.WriteLine("1. Groix\t-\tLorient");
+        Console.WriteLine("2. Lorient\t-\tGroix");
+        Console.WriteLine("3. Le Palais\t-\tQuiberon");
+        Console.WriteLine("4. Quiberon\t-\tLe Palais");
     }
 
     // affiche toutes les horaires du jour correspondant 
-    static void afficherHoraires(Liaison liaison, uint jour){
-        string[] horaires;
-        bool succes = horairesJour(liaison, jour, out horaires);
+    static void afficherHoraires(string[] horaires){
+        int nbHoraires;
+        uint i;
 
-        Console.Write("Horaires du " + jour + " pour la liaison ");
-        afficherLiaison(liaison);
+        Console.Clear(); // nettoie la console
+        Console.WriteLine("-- Choix de l'horaire --\n\n");
 
-        if (succes){
-            foreach (string heure in horaires){
-                Console.Write(heure + " ");
-            }
-            Console.WriteLine();
+        nbHoraires = horaires.Length;
+        for (i = 0; i < nbHoraires; i++){
+            Console.WriteLine((i + 1) + ". " + horaires[i]);
         }
     }
 }
