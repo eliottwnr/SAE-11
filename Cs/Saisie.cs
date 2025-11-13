@@ -13,8 +13,8 @@ partial class Programme {
         Console.WriteLine("-- Choix de la liaison --\n\n");
 
         Console.WriteLine("   Départ\t-\tArrivée\n");
-        Console.WriteLine("1. Lorient\t-\tGroix");
-        Console.WriteLine("2. Groix\t-\tLorient");
+        Console.WriteLine("1. Groix\t-\tLorient");
+        Console.WriteLine("2. Lorient\t-\tGroix");
         Console.WriteLine("3. Le Palais\t-\tQuiberon");
         Console.WriteLine("4. Quiberon\t-\tLe Palais");
 
