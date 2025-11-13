@@ -18,9 +18,9 @@ partial class Programme {
 
     // permet de représenter les Liaisons sous une forme plus explicite que des entiers
     enum Liaison {
-        groix_lorient, 
-        lorient_groix, 
-        lepalais_quiberon,
-        quiberon_lepalais
+        groix_lorient = 1, 
+        lorient_groix = 2, 
+        lepalais_quiberon = 3,
+        quiberon_lepalais = 4
     }
 }
