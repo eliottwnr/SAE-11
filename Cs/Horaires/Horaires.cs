@@ -19,10 +19,6 @@ partial class Programme {
             estLue = true;
         }
 
-        if (!estLue){
-            Console.WriteLine("mauvais chemin :" + cheminAccess);
-        }
-
         return estLue;
     }
 
@@ -49,11 +45,8 @@ partial class Programme {
                 break;
         }
 
-        // si le jour renseigné est valide
-        if (jour > 0 && jour < 31){
-            succes = lireFichier(cheminAccess, out horaires);
-            horaires = horaires[jour].Split(";"); // sélectionne le jour renseigné
-        }
+        succes = lireFichier(cheminAccess, out horaires);
+        horaires = horaires[jour].Split(";"); // sélectionne le jour renseigné
 
         return succes;
     }
