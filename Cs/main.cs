@@ -14,5 +14,7 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
         // récupération des horaires du jour et de la liaison choisis
         horairesJour(liaison, traversee.date[0], out horairesDuJour); // date[0] correspond au jour
         traversee.heure = saisirHoraire(horairesDuJour);
+
+        afficherTraversee(traversee);
     }
 }

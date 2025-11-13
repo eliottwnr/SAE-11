@@ -34,4 +34,34 @@ partial class Programme {
             Console.WriteLine((i + 1) + ". " + horaires[i]);
         }
     }
+
+    static void afficherTraversee(Traversee traversee){
+        Console.Clear();
+        Console.WriteLine("-- Résumé de la traversée --\n\n");
+
+        Console.Write("Liaison : ");
+        switch (traversee.liaison){
+            case Liaison.groix_lorient:
+                Console.WriteLine("Groix - Lorient");
+                break;
+
+            case Liaison.lorient_groix:
+                Console.WriteLine("Lorient - Groix");
+                break;
+
+            case Liaison.quiberon_lepalais:
+                Console.WriteLine("Quiberon - Le Palais");
+                break;
+
+            case Liaison.lepalais_quiberon:
+                Console.WriteLine("Le Palais - Quiberon");
+                break;
+
+            default: // rien besoin de mettre puisque traversee.liaison fait partie d'une énumération
+                break;
+        }
+
+        Console.WriteLine($"Date : {traversee.date[0]}/{traversee.date[1]}/{traversee.date[2]}"); // $ permet de formater la chaîne
+        Console.WriteLine($"Heure : {traversee.heure[0]}:{traversee.heure[1]}");
+    }
 }
