@@ -1,5 +1,7 @@
 using System;
 
+// Contient tout ce qui est en rapport avec le stockage de données (temporaires / au moment de l'exécution)
+// structures, énumérations, etc... 
 partial class Programme {
     struct Traversee {
         public uint liaison;

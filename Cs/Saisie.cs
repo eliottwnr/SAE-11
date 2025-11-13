@@ -1,5 +1,6 @@
 using System;
 
+// S'occupe de toutes les saisies utilisateur
 partial class Programme {
     static uint saisirLiaison(){
         uint liaison;

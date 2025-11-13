@@ -1,5 +1,6 @@
 using System;
 
+// S'occupe de tout l'affichage 
 partial class Programme {
     static void afficherLiaison(uint liaison){
         switch (liaison){
