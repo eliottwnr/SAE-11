@@ -2,21 +2,21 @@ using System;
 
 // S'occupe de tout l'affichage 
 partial class Programme {
-    static void afficherLiaison(uint liaison){
+    static void afficherLiaison(Liaison liaison){
         switch (liaison){
-            case 1: 
+            case Liaison.lorient_groix: 
                 Console.WriteLine("   Lorient\t-\tGroix");
                 break;
                 
-            case 2:
+            case Liaison.groix_lorient:
                 Console.WriteLine("   Groix\t-\tLorient");
                 break;
 
-            case 3: 
+            case Liaison.quiberon_lepalais: 
                 Console.WriteLine("   Quiberon\t-\tLe Palais");
                 break;
 
-            case 4: 
+            case Liaison.lepalais_quiberon: 
                 Console.WriteLine("   Le Palais\t-\tQuiberon");
                 break;
 

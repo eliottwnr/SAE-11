@@ -4,15 +4,23 @@ using System;
 // structures, énumérations, etc... 
 partial class Programme {
     struct Traversee {
-        public uint liaison;
+        public Liaison liaison;
         public uint[] date;
         public uint[] heure;
 
-        public Traversee(uint l){
+        public Traversee(Liaison l){
             liaison = l;
 
             date = new uint[3]; // Jour, Mois, Année 
             heure = new uint[2]; // Heures, Minutes
         }
+    }
+
+    // permet de représenter les Liaisons sous une forme plus explicite que des entiers
+    enum Liaison {
+        groix_lorient, 
+        lorient_groix, 
+        lepalais_quiberon,
+        quiberon_lepalais
     }
 }

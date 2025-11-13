@@ -2,7 +2,8 @@ using System;
 
 // S'occupe de toutes les saisies utilisateur
 partial class Programme {
-    static uint saisirLiaison(){
+    // Plus simple de saisir un entier non signé mais plus explicite de renvoyer une énumération
+    static Liaison saisirLiaison(){
         uint liaison;
         
         string? saisie; // string? : string qui peut être null (au cas où aucune saisie)
@@ -27,6 +28,6 @@ partial class Programme {
             }
         } while (liaison != 1 && liaison != 2 && liaison != 3 && liaison != 4);
 
-        return liaison;
+        return (Liaison) liaison; // cast (conversion) vers l'énumération
     }
 }
