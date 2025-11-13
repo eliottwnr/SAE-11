@@ -30,4 +30,45 @@ partial class Programme {
 
         return (Liaison) liaison; // cast (conversion) vers l'énumération
     }
+
+    // permet de saisir des dates en novembre 2025 (mais modifiable)
+    static uint[] saisirDate(){
+        uint[] date = new uint[3]; // jour, mois, année
+
+        string? saisie;
+        bool saisieJuste;
+
+        Console.Clear(); // nettoie la console
+        do {
+            Console.Write("Saisir le jour de la traversée : ");
+            saisie = Console.ReadLine();
+            saisieJuste = uint.TryParse(saisie, out date[0]);
+
+            if (!saisieJuste || date[0] <= 0 || date[0] >= 31){
+                Console.WriteLine("Saisie Incorrecte !");
+            }
+        } while (date[0] <= 0 || date[0] >= 31); // tant que le jour n'est pas entre 1 et 30 (inclus)
+
+        do {
+            Console.Write("Saisir le mois de la traversée : ");
+            saisie = Console.ReadLine();
+            saisieJuste = uint.TryParse(saisie, out date[1]);
+
+            if (!saisieJuste || date[1] != 11){
+                Console.WriteLine("Saisie Incorrecte !");
+            }
+        } while (date[1] != 11); // tant que le mois n'est pas en novembre 
+
+        do {
+            Console.Write("Saisir l'année de la traversée : ");
+            saisie = Console.ReadLine();
+            saisieJuste = uint.TryParse(saisie, out date[2]);
+
+            if (!saisieJuste || date[2] != 2025){
+                Console.WriteLine("Saisie Incorrecte !");
+            }
+        } while (date[2] != 2025); // tant que le mois n'est pas 2025 
+
+        return date;
+    }
 }
