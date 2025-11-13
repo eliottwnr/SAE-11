@@ -9,17 +9,17 @@ partial class Programme {
         string? saisie; // string? : string qui peut être null (au cas où aucune saisie)
         bool saisieJuste;
 
-        Console.Clear();
+        Console.Clear(); // nettoie la console
         Console.WriteLine("-- Choix de la liaison --\n\n");
 
         Console.WriteLine("   Départ\t-\tArrivée\n");
         Console.WriteLine("1. Lorient\t-\tGroix");
         Console.WriteLine("2. Groix\t-\tLorient");
-        Console.WriteLine("3. Quiberon\t-\tLe Palais");
-        Console.WriteLine("4. Le Palais\t-\tQuiberon");
+        Console.WriteLine("3. Le Palais\t-\tQuiberon");
+        Console.WriteLine("4. Quiberon\t-\tLe Palais");
 
         do {
-            Console.Write("--> ");
+            Console.Write("--> "); // prompt
             saisie = Console.ReadLine();
             saisieJuste = uint.TryParse(saisie, out liaison);
 
