@@ -46,7 +46,7 @@ partial class Programme {
         }
 
         succes = lireFichier(cheminAccess, out horaires);
-        horaires = horaires[jour].Split(";"); // sélectionne le jour renseigné
+        horaires = horaires[jour - 1].Split(";"); // sélectionne l'indice du jour renseigné (jour 1 = indice 0)
 
         return succes;
     }
