@@ -24,25 +24,27 @@ partial class Programme {
         quiberon_lepalais = 4
     }
 
+    // valeurs correspondent à la ligne dans le .csv
     enum CodeCategoriePassager {
-        adu26p, 
-        jeu1825, 
-        enf417,
-        bebe,
-        ancomp
+        adu26p = 0, 
+        jeu1825 = 1, 
+        enf417 = 2,
+        bebe = 3,
+        ancomp = 4
     }
 
+    // valeurs correspondent à la ligne dans le .csv
     enum CodeCategorieVehicule {
-        trot,
-        velo,
-        velelec,
-        cartand,
-        mobil,
-        moto,
-        cat1,
-        cat2,
-        cat3,
-        cat4,
-        camp
+        trot = 0,
+        velo = 1,
+        velelec = 2,
+        cartand = 3,
+        mobil = 4,
+        moto = 5,
+        cat1 = 6,
+        cat2 = 7,
+        cat3 = 8,
+        cat4 = 9,
+        camp = 10
     }
 }
