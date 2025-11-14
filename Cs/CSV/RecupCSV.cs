@@ -24,7 +24,7 @@ partial class Programme {
 
     static bool horairesJour(Liaison liaison, uint jour, out string[] horaires){ // jour étant le jour du mois
         bool succes = false;
-        string cheminAccess = "Horaires/";
+        string cheminAccess = "CSV/Horaires/";
 
         horaires = new string[0]; // initialise un tableau vide au cas où la fonction lireFichier n'arrive pas à lire
 
