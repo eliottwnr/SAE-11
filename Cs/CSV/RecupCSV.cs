@@ -60,32 +60,29 @@ partial class Programme {
         string[] tarifs;
         string[] ligne;
 
-        uint indiceLiaison; // 1 pour groix / lorient et 2 pour le palais / quiberon
+        uint indiceLiaison = 0; // 1 pour groix / lorient et 2 pour le palais / quiberon
 
         switch (liaison){
             case Liaison.lorient_groix:
-                indiceLiaison = 1;
+                indiceLiaison = 0;
                 break;
             case Liaison.groix_lorient:
-                indiceLiaison = 1;
+                indiceLiaison = 0;
                 break;
             case Liaison.quiberon_lepalais:
-                indiceLiaison = 2;
+                indiceLiaison = 1;
                 break;
             case Liaison.lepalais_quiberon:
-                indiceLiaison = 2;
+                indiceLiaison = 1;
                 break;
             default: // liaison est une énumération dont tous les cas sont traités ci-dessus
-                indiceLiaison = 1;
                 break;
         }
 
         succes = lireFichier(cheminAccess, out tarifs);
         nbLignesFichier = tarifs.Length;
 
-        indiceLiaison = 0;
-
-        ligne = tarifs[(int) passager].Split(';');
+        ligne = tarifs[(int) passager].Split(';'); 
 
         tarif = double.Parse(ligne[indiceLiaison]); // sélectionne le bon tarif de la ligne 
 
