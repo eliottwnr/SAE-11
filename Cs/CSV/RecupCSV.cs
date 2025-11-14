@@ -60,7 +60,7 @@ partial class Programme {
         string[] tarifs;
         string[] ligne;
 
-        uint indiceLiaison = 0; // 1 pour groix / lorient et 2 pour le palais / quiberon
+        uint indiceLiaison = 0; // 0 pour groix / lorient et 1 pour le palais / quiberon
 
         switch (liaison){
             case Liaison.lorient_groix:
@@ -98,7 +98,7 @@ partial class Programme {
         string[] tarifs;
         string[] ligne;
 
-        uint indiceLiaison = 0; // 1 pour groix / lorient et 2 pour le palais / quiberon
+        uint indiceLiaison = 0; // 0 pour groix / lorient et 1 pour le palais / quiberon
 
         switch (liaison){
             case Liaison.lorient_groix:
