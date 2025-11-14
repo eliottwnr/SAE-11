@@ -1,0 +1,37 @@
+:root {
+  --fond: #0f172a;
+  --texte: #e2e8f0;
+  --attenue: #94a3b8;
+  --bloc: #111827;
+  --accent: #38bdf8;
+  --ok: #22c55e;
+  --avert: #f59e0b;
+  --alerte: #ef4444;
+  --neon: #e3ff00;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  font-family: system-ui, sans-serif;
+  color: var(--texte);
+  background: var(--fond);
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+.cache {
+  display: none;
+}
+
+.attenue {
+  color: var(--attenue);
+}

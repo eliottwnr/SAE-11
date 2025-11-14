@@ -1,0 +1,99 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <title>CAN Après-vente — Facture</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="./css/base.css" rel="stylesheet">
+  <link href="./css/global.css" rel="stylesheet">
+  <link href="./css/composants.css" rel="stylesheet">
+</head>
+<body class="conteneur">
+  <header class="entete">
+    <h1 class="marque">CAN Après-vente</h1>
+    <nav class="navigation">
+      <a href="./index.html">Accueil</a>
+      <a href="./cartes.html">Cartes</a>
+      <a href="./facture.html" class="actif">Facture</a>
+      <a href="./tableau-de-bord.html">Tableau de bord</a>
+      <a href="./statistiques.html">Statistiques</a>
+    </nav>
+  </header>
+
+  <nav class="fil-ariane" aria-label="Vous êtes ici">
+    <ol>
+      <li><a href="./index.html">Accueil</a></li>
+      <li aria-current="page">Facture</li>
+    </ol>
+  </nav>
+
+  <main class="principal">
+    <section class="carte-bloc">
+      <form class="formulaire-ligne" action="./facture.html" method="get">
+        <label for="res">N° réservation</label>
+        <input id="res" name="id" type="text" placeholder="Saisir le numéro" required>
+        <button type="submit">Charger</button>
+      </form>
+    </section>
+
+    <section class="facture carte-bloc" data-role="facture">
+      <header class="facture-entete">
+        <div class="facture-gauche">
+          <h2>CAN</h2>
+        </div>
+        <div class="facture-droite">
+          <div><strong>Réservation:</strong> <span data-lier="reservationId"></span></div>
+          <div><strong>Liaison:</strong> <span data-lier="liaison"></span></div>
+          <div><strong>Date:</strong> <span data-lier="date"></span></div>
+          <div><strong>Horaire:</strong> <span data-lier="horaire"></span></div>
+        </div>
+      </header>
+
+      <section class="facture-section" data-role="passagers">
+        <h3>Passagers</h3>
+        <div class="tableau" role="table" aria-label="Passagers">
+          <div class="ligne entete" role="row">
+            <div>Code</div>
+            <div>Libellé</div>
+            <div>Qté</div>
+            <div>PU</div>
+            <div>Total</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="facture-section" data-role="vehicules">
+        <h3>Véhicules</h3>
+        <div class="tableau" role="table" aria-label="Véhicules">
+          <div class="ligne entete" role="row">
+            <div>Code</div>
+            <div>Libellé</div>
+            <div>Qté</div>
+            <div>PU</div>
+            <div>Total</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="facture-totaux" data-role="totaux">
+        <div class="totaux-ligne">
+          <span>Sous-total passagers</span>
+          <span data-lier="subtotalPassagers"></span>
+        </div>
+        <div class="totaux-ligne">
+          <span>Sous-total véhicules</span>
+          <span data-lier="subtotalVehicules"></span>
+        </div>
+        <div class="totaux-ligne important">
+          <span>Total</span>
+          <span data-lier="total"></span>
+        </div>
+      </section>
+    </section>
+  </main>
+
+  <footer class="pied">
+    <span>CAN 2025</span>
+  </footer>
+</body>
+</html>
