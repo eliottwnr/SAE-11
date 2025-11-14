@@ -47,4 +47,25 @@ partial class Programme {
         cat4 = 9,
         camp = 10
     }
+
+    struct Passager {
+        public string nom, prenom;
+        public CodeCategoriePassager categorie;
+
+        public Passager(string n, string p, CodeCategoriePassager c){
+            nom = n;
+            prenom = p;
+            categorie = c;
+        }
+    }
+
+    struct Vehicule {
+        public uint quantite;
+        public CodeCategorieVehicule categorie;
+
+        public Vehicule(uint q, CodeCategorieVehicule c){
+            quantite = q;
+            categorie = c;
+        }
+    }
 }
