@@ -88,4 +88,42 @@ partial class Programme {
 
         return succes;
     }
+
+    static bool tarifsVehicules(CodeCategorieVehicule vehicule, Liaison liaison, out double tarif){
+        bool succes = false;
+
+        string cheminAccess = "CSV/Tarifs/vehicules.csv"; // de forme numéro du CodeCategorieVehicule;tarifGroix-Lorient;tarifLePalais-Quiberon
+        int nbLignesFichier = 0;
+
+        string[] tarifs;
+        string[] ligne;
+
+        uint indiceLiaison = 0; // 1 pour groix / lorient et 2 pour le palais / quiberon
+
+        switch (liaison){
+            case Liaison.lorient_groix:
+                indiceLiaison = 0;
+                break;
+            case Liaison.groix_lorient:
+                indiceLiaison = 0;
+                break;
+            case Liaison.quiberon_lepalais:
+                indiceLiaison = 1;
+                break;
+            case Liaison.lepalais_quiberon:
+                indiceLiaison = 1;
+                break;
+            default: // liaison est une énumération dont tous les cas sont traités ci-dessus
+                break;
+        }
+
+        succes = lireFichier(cheminAccess, out tarifs);
+        nbLignesFichier = tarifs.Length;
+
+        ligne = tarifs[(int) vehicule].Split(';'); 
+
+        tarif = double.Parse(ligne[indiceLiaison]); // sélectionne le bon tarif de la ligne 
+
+        return succes;
+    }
 }
