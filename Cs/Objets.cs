@@ -24,7 +24,7 @@ partial class Programme {
         quiberon_lepalais = 4
     }
 
-    // valeurs correspondent à la ligne dans le .csv
+    // valeurs correspondent à la ligne dans le .csv (comme un indice)
     enum CodeCategoriePassager {
         adu26p = 0, 
         jeu1825 = 1, 
@@ -33,7 +33,7 @@ partial class Programme {
         ancomp = 4
     }
 
-    // valeurs correspondent à la ligne dans le .csv
+    // valeurs correspondent à la ligne dans le .csv (commme un indice)
     enum CodeCategorieVehicule {
         trot = 0,
         velo = 1,
