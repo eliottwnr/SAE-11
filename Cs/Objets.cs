@@ -23,4 +23,26 @@ partial class Programme {
         lepalais_quiberon = 3,
         quiberon_lepalais = 4
     }
+
+    enum CodeCategoriePassager {
+        adu26p, 
+        jeu1825, 
+        enf417,
+        bebe,
+        ancomp
+    }
+
+    enum CodeCategorieVehicule {
+        trot,
+        velo,
+        velelec,
+        cartand,
+        mobil,
+        moto,
+        cat1,
+        cat2,
+        cat3,
+        cat4,
+        camp
+    }
 }
