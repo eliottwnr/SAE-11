@@ -1,7 +1,7 @@
 using System;
 using System.IO;
 
-// Gère la récupération des horaires dans le csv correspondant
+// Gère la récupération des données dans le csv correspondant
 partial class Programme {
     // renvoie true si la lecture s'est bien passée, false sinon
     static bool lireFichier(string cheminAccess, out string[] lignes){
