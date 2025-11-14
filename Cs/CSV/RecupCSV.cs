@@ -50,4 +50,45 @@ partial class Programme {
 
         return succes;
     }
+
+    static bool tarifsPassagers(CodeCategoriePassager passager, Liaison liaison, out double tarif){
+        bool succes = false;
+
+        string cheminAccess = "CSV/Tarifs/passagers.csv"; // de forme numéro du CodeCategoriePassager;tarifGroix-Lorient;tarifLePalais-Quiberon
+        int nbLignesFichier = 0;
+
+        string[] tarifs;
+        string[] ligne;
+
+        uint indiceLiaison; // 1 pour groix / lorient et 2 pour le palais / quiberon
+
+        switch (liaison){
+            case Liaison.lorient_groix:
+                indiceLiaison = 1;
+                break;
+            case Liaison.groix_lorient:
+                indiceLiaison = 1;
+                break;
+            case Liaison.quiberon_lepalais:
+                indiceLiaison = 2;
+                break;
+            case Liaison.lepalais_quiberon:
+                indiceLiaison = 2;
+                break;
+            default: // liaison est une énumération dont tous les cas sont traités ci-dessus
+                indiceLiaison = 1;
+                break;
+        }
+
+        succes = lireFichier(cheminAccess, out tarifs);
+        nbLignesFichier = tarifs.Length;
+
+        indiceLiaison = 0;
+
+        ligne = tarifs[(int) passager].Split(';');
+
+        tarif = double.Parse(ligne[indiceLiaison]); // sélectionne le bon tarif de la ligne 
+
+        return succes;
+    }
 }
