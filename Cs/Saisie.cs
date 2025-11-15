@@ -16,10 +16,10 @@ partial class Programme {
             saisie = Console.ReadLine();
             saisieJuste = uint.TryParse(saisie, out liaison);
 
-            if (!saisieJuste || (liaison != 1 && liaison != 2 && liaison != 3 && liaison != 4)){
+            if (!saisieJuste || (liaison < 1 || liaison > 4)){
                 afficherSaisieIncorrecte();
             }
-        } while (liaison != 1 && liaison != 2 && liaison != 3 && liaison != 4);
+        } while (liaison < 1 || liaison > 4);
 
         return (Liaison) liaison; // cast (conversion) vers l'énumération
     }
