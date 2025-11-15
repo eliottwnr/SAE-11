@@ -64,4 +64,13 @@ partial class Programme {
         Console.WriteLine($"Date : {traversee.date[0]}/{traversee.date[1]}/{traversee.date[2]}"); // $ permet de formater la chaîne
         Console.WriteLine($"Heure : {traversee.heure[0]}:{traversee.heure[1]}");
     }
+
+    static void afficherCategoriesPassager(){
+        Console.WriteLine("\nSaisir votre catégorie\n");
+        Console.WriteLine("1. Adulte 26 ans et plus");
+        Console.WriteLine("2. Jeune 18-25 ans");
+        Console.WriteLine("3. Enfant 4-17 ans");
+        Console.WriteLine("4. Bébé -4 ans");
+        Console.WriteLine("5. Animal de compagnie");
+    }
 }

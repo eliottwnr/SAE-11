@@ -93,4 +93,73 @@ partial class Programme {
 
         return heure;
     }
+
+    static CodeCategoriePassager saisirCategoriePassager(){
+        string? saisie;
+        bool saisieJuste;
+        uint code;
+
+        afficherCategoriesPassager();
+        do {
+            afficherPrompt();
+            saisie = Console.ReadLine();
+            saisieJuste = uint.TryParse(saisie, out code);
+
+            if (code < 1 || code > 5){
+                afficherSaisieIncorrecte();
+            }
+        } while (code < 1 || code > 5);
+
+        return (CodeCategoriePassager) (code - 1); // car les codes vont de 0 à 4 mais la saisie est de 1 à 5 (voir affichage)
+    }
+
+    static Passager saisirPassager(){
+        string nom = "";
+        string prenom = "";
+        CodeCategoriePassager categorie;
+
+        string? saisie;
+        int indiceLettre;
+
+        Console.Clear(); // Nettoie la console
+        Console.WriteLine("-- Saisie du/des passager(s) --\n\n");
+
+        // saisie du nom
+        do {
+            Console.Write("Saisir votre nom : ");
+            saisie = Console.ReadLine();
+            if (saisie == null || !saisie.All(char.IsLetter)){ // si la saisie ne contient pas seulement des lettres ou est nulle
+                afficherSaisieIncorrecte();
+            }
+            else { // si la saisie est correcte
+                nom += char.ToUpper(saisie[0]); // ajoute la première lettre de la saisie en majuscules
+
+                // ajoute le reste des lettres de la saisie en minuscule
+                for (indiceLettre = 1; indiceLettre < saisie.Length; indiceLettre++){ // pour toutes les lettres en partant de la seconde
+                    nom += char.ToLower(saisie[indiceLettre]);
+                }
+            }
+        } while (nom == "");
+
+        // saisie du prénom
+        do {
+            Console.Write("Saisir votre prénom : ");
+            saisie = Console.ReadLine();
+            if (saisie == null || !saisie.All(char.IsLetter)){ // si la saisie ne contient pas seulement des lettres ou est nulle
+                afficherSaisieIncorrecte();
+            }
+            else { // si la saisie est correcte
+                prenom += char.ToUpper(saisie[0]); // ajoute la première lettre de la saisie en majuscules
+
+                // ajoute le reste des lettres de la saisie en minuscule
+                for (indiceLettre = 1; indiceLettre < saisie.Length; indiceLettre++){ // pour toutes les lettres en partant de la seconde
+                    prenom += char.ToLower(saisie[indiceLettre]);
+                }
+            }
+        } while (prenom == "");
+
+        categorie = saisirCategoriePassager();
+
+        return new Passager(nom, prenom, categorie);
+    }
 }
