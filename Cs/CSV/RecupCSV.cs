@@ -62,21 +62,11 @@ partial class Programme {
 
         uint indiceLiaison = 0; // 0 pour groix / lorient et 1 pour le palais / quiberon
 
-        switch (liaison){
-            case Liaison.lorient_groix:
-                indiceLiaison = 0;
-                break;
-            case Liaison.groix_lorient:
-                indiceLiaison = 0;
-                break;
-            case Liaison.quiberon_lepalais:
-                indiceLiaison = 1;
-                break;
-            case Liaison.lepalais_quiberon:
-                indiceLiaison = 1;
-                break;
-            default: // liaison est une énumération dont tous les cas sont traités ci-dessus
-                break;
+        if ((uint) liaison <= 2){ // groix-lorient et lorient-groix
+            indiceLiaison = 0;
+        }
+        else { // lepalais-quiberon et quiberon-lepalais
+            indiceLiaison = 1;
         }
 
         succes = lireFichier(cheminAccess, out tarifs);
@@ -100,21 +90,11 @@ partial class Programme {
 
         uint indiceLiaison = 0; // 0 pour groix / lorient et 1 pour le palais / quiberon
 
-        switch (liaison){
-            case Liaison.lorient_groix:
-                indiceLiaison = 0;
-                break;
-            case Liaison.groix_lorient:
-                indiceLiaison = 0;
-                break;
-            case Liaison.quiberon_lepalais:
-                indiceLiaison = 1;
-                break;
-            case Liaison.lepalais_quiberon:
-                indiceLiaison = 1;
-                break;
-            default: // liaison est une énumération dont tous les cas sont traités ci-dessus
-                break;
+        if ((uint) liaison <= 2){ // groix-lorient et lorient-groix
+            indiceLiaison = 0;
+        }
+        else { // lepalais-quiberon et quiberon-lepalais
+            indiceLiaison = 1;
         }
 
         succes = lireFichier(cheminAccess, out tarifs);
