@@ -216,4 +216,23 @@ partial class Programme {
 
         return (saisie == "O");
     }
+
+    static CodeCategorieVehicule saisirCategorieVehicule(){
+        string? saisie;
+        bool saisieJuste;
+        int code;
+
+        afficherCategoriesPassager();
+        do {
+            afficherPrompt();
+            saisie = Console.ReadLine();
+            saisieJuste = int.TryParse(saisie, out code);
+
+            if (!saisieJuste || code < 1 || code > 11){
+                afficherSaisieIncorrecte();
+            }
+        } while (!saisieJuste || code < 1 || code > 11);
+
+        return (CodeCategorieVehicule) (code - 1); // les codes vont de 0 à 10 mais les saisies de 1 à 11
+    }
 }

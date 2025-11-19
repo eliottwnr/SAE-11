@@ -73,4 +73,19 @@ partial class Programme {
         Console.WriteLine("4. Bébé -4 ans");
         Console.WriteLine("5. Animal de compagnie");
     }
+
+    static void afficherCategoriesVehicule(){
+        Console.WriteLine("\nSaisir votre catégorie\n");
+        Console.WriteLine("1. Trottinette électrique");
+        Console.WriteLine("2. Vélo ou remorque à vélo");
+        Console.WriteLine("3. Vélo électrique");
+        Console.WriteLine("4. Vélo cargo ou tandem");
+        Console.WriteLine("5. Deux-roues <= 125cm³");
+        Console.WriteLine("6. Deux-roues > 125cm³");
+        Console.WriteLine("7. Voiture moins de 4m");
+        Console.WriteLine("8. Voiture de 4m à 4,39m");
+        Console.WriteLine("9. Voiture de 4,40m à 4,79m");
+        Console.WriteLine("10. Voiture de 4,80m et plus");
+        Console.WriteLine("11. Camping-car ou véhicule de plus de 2,10m de haut");
+    }
 }
