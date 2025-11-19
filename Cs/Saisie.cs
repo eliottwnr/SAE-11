@@ -162,4 +162,19 @@ partial class Programme {
 
         return new Passager(nom, prenom, categorie);
     }
+
+    static bool autrePassager(){
+        string? saisie;
+
+        do {
+            Console.Write("Y aura-t-il un autre passager ? [o/n] ");
+            saisie = Console.ReadLine();
+
+            if (saisie != null){
+                saisie = saisie.ToUpper();
+            }
+        } while (saisie != "O" && saisie != "N");
+
+        return (saisie == "O");
+    }
 }
