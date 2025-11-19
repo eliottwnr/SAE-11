@@ -113,13 +113,63 @@ partial class Programme {
         return (CodeCategoriePassager) (code - 1); // car les codes vont de 0 à 4 mais la saisie est de 1 à 5 (voir affichage)
     }
 
+    static bool estLettresOuTiret(string? chaine){
+        // renvoie true si chaine contient uniquement des lettres et / ou des tirets 
+        bool estJuste = true;
+        int i = 0;
+
+        if (chaine == null){
+            estJuste = false;
+        }
+
+        else {
+            while (estJuste){
+                if (!char.IsLetter(chaine[i]) || chaine[i] != '-'){
+                    estJuste = false;
+                }
+                i++;
+            }
+        }
+
+        return estJuste;
+    }
+
+    static string initCap(string? chaine){
+        // met la première lettre de la chaine en majuscule, le reste en minuscule
+        string nouvelleChaine = "";
+        int indiceLettre;
+        bool tiret = false; // sert à mettre la lettre d'après en majuscule (s'il y en a une)
+
+        if (chaine != null){
+            nouvelleChaine += char.ToUpper(chaine[0]); // ajoute la première lettre de la chaine en majuscules
+
+            // ajoute le reste des lettres de la chaine en minuscule
+            for (indiceLettre = 1; indiceLettre < chaine.Length; indiceLettre++){ // pour toutes les lettres en partant de la seconde
+                if (char.IsLetter(chaine[indiceLettre])){ // un tiret ne se met pas en majuscules
+                    if (tiret){ // si l'élément d'avant est un tiret
+                        nouvelleChaine += char.ToUpper(chaine[indiceLettre]);
+                        tiret = false;
+                    }
+                    else {
+                        nouvelleChaine += char.ToLower(chaine[indiceLettre]);
+                    }
+                }
+                else { // si c'est un tiret
+                    nouvelleChaine += chaine[indiceLettre];
+                    tiret = true; 
+                }
+            }
+        }
+
+        return nouvelleChaine;
+    }
+
     static Passager saisirPassager(){
         string nom = "";
         string prenom = "";
         CodeCategoriePassager categorie;
 
         string? saisie;
-        int indiceLettre;
 
         Console.Clear(); // Nettoie la console
         Console.WriteLine("-- Saisie du/des passager(s) --\n\n");
@@ -128,16 +178,11 @@ partial class Programme {
         do {
             Console.Write("Saisir votre nom : ");
             saisie = Console.ReadLine();
-            if (saisie == null || !saisie.All(char.IsLetter)){ // si la saisie ne contient pas seulement des lettres ou est nulle
+            if (estLettresOuTiret(saisie)){ // si la saisie ne contient pas seulement des lettres (ou un tiret) ou est nulle
                 afficherSaisieIncorrecte();
             }
             else { // si la saisie est correcte
-                nom += char.ToUpper(saisie[0]); // ajoute la première lettre de la saisie en majuscules
-
-                // ajoute le reste des lettres de la saisie en minuscule
-                for (indiceLettre = 1; indiceLettre < saisie.Length; indiceLettre++){ // pour toutes les lettres en partant de la seconde
-                    nom += char.ToLower(saisie[indiceLettre]);
-                }
+                nom = initCap(saisie);
             }
         } while (nom == "");
 
@@ -145,16 +190,11 @@ partial class Programme {
         do {
             Console.Write("Saisir votre prénom : ");
             saisie = Console.ReadLine();
-            if (saisie == null || !saisie.All(char.IsLetter)){ // si la saisie ne contient pas seulement des lettres ou est nulle
+            if (estLettresOuTiret(saisie)){ // si la saisie ne contient pas seulement des lettres ou est nulle
                 afficherSaisieIncorrecte();
             }
             else { // si la saisie est correcte
-                prenom += char.ToUpper(saisie[0]); // ajoute la première lettre de la saisie en majuscules
-
-                // ajoute le reste des lettres de la saisie en minuscule
-                for (indiceLettre = 1; indiceLettre < saisie.Length; indiceLettre++){ // pour toutes les lettres en partant de la seconde
-                    prenom += char.ToLower(saisie[indiceLettre]);
-                }
+                prenom = initCap(saisie);
             }
         } while (prenom == "");
 
