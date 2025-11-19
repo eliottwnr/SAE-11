@@ -202,11 +202,11 @@ partial class Programme {
         return new Passager(nom, prenom, categorie);
     }
 
-    static bool autrePassager(){
+    static bool validation(string prompt){
         string? saisie;
 
         do {
-            Console.Write("Y aura-t-il un autre passager ? [o/n] ");
+            Console.Write(prompt + " [o/n] ");
             saisie = Console.ReadLine();
 
             if (saisie != null){
@@ -217,12 +217,16 @@ partial class Programme {
         return (saisie == "O");
     }
 
+    static bool autrePassager(){
+        return validation("Y aura-t-il d'autres passagers ? ");
+    }
+
     static CodeCategorieVehicule saisirCategorieVehicule(){
         string? saisie;
         bool saisieJuste;
         int code;
 
-        afficherCategoriesPassager();
+        afficherCategoriesVehicule();
         do {
             afficherPrompt();
             saisie = Console.ReadLine();
@@ -234,5 +238,31 @@ partial class Programme {
         } while (!saisieJuste || code < 1 || code > 11);
 
         return (CodeCategorieVehicule) (code - 1); // les codes vont de 0 à 10 mais les saisies de 1 à 11
+    }
+
+    static Vehicule saisirVehicule(){
+        string? saisie;
+        bool saisieJuste;
+        uint quantite;
+
+        Console.Clear();
+        Console.WriteLine("-- Saisie du/des véhicule(s) --\n\n");
+
+        CodeCategorieVehicule categorie = saisirCategorieVehicule();
+        
+        do {
+            Console.Write("Saisir la quantité : ");
+            saisie = Console.ReadLine();
+            saisieJuste = uint.TryParse(saisie, out quantite);
+            if (!saisieJuste || quantite < 1){
+                afficherSaisieIncorrecte();
+            }
+        } while (!saisieJuste || quantite < 1);
+
+        return new Vehicule(quantite, categorie);
+    }
+
+    static bool autreVehicule(){
+        return validation("Y aura-t-il d'autres véhicules ? ");
     }
 }

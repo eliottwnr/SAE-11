@@ -23,5 +23,16 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
         do {
             passagers.Add(saisirPassager());
         } while (autrePassager());
+
+        List<Vehicule> vehicules = new List<Vehicule>(); // On ne sait pas combien il y aura de véhicules en avance
+
+        do {
+            vehicules.Add(saisirVehicule());
+        } while (autreVehicule());
+
+        // test 
+        foreach (Vehicule v in vehicules){
+            Console.WriteLine(v.quantite.ToString() + ' ' + v.categorie);
+        }
     }
 }
