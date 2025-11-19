@@ -118,13 +118,12 @@ partial class Programme {
         bool estJuste = true;
         int i = 0;
 
-        if (chaine == null){
+        if (chaine == null || chaine.Length == 0){
             estJuste = false;
         }
-
         else {
-            while (estJuste){
-                if (!char.IsLetter(chaine[i]) || chaine[i] != '-'){
+            while (estJuste && i < chaine.Length){
+                if (!char.IsLetter(chaine[i]) && chaine[i] != '-'){
                     estJuste = false;
                 }
                 i++;
@@ -178,7 +177,7 @@ partial class Programme {
         do {
             Console.Write("Saisir votre nom : ");
             saisie = Console.ReadLine();
-            if (estLettresOuTiret(saisie)){ // si la saisie ne contient pas seulement des lettres (ou un tiret) ou est nulle
+            if (!estLettresOuTiret(saisie)){ // si la saisie ne contient pas seulement des lettres (ou un tiret) ou est nulle
                 afficherSaisieIncorrecte();
             }
             else { // si la saisie est correcte
@@ -190,7 +189,7 @@ partial class Programme {
         do {
             Console.Write("Saisir votre prénom : ");
             saisie = Console.ReadLine();
-            if (estLettresOuTiret(saisie)){ // si la saisie ne contient pas seulement des lettres ou est nulle
+            if (!estLettresOuTiret(saisie)){ // si la saisie ne contient pas seulement des lettres ou est nulle
                 afficherSaisieIncorrecte();
             }
             else { // si la saisie est correcte
