@@ -30,9 +30,38 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
             vehicules.Add(saisirVehicule());
         } while (autreVehicule());
 
-        // test 
-        foreach (Vehicule v in vehicules){
-            Console.WriteLine(v.quantite.ToString() + ' ' + v.categorie);
+        // récupère le tarif de chaque véhicule et passager pour avoir le tarif total
+        double prixTotal = 0;
+        double prixPassager, prixVehicule;
+
+        int indexPassager = 0;
+        int indexVehicule = 0;
+
+        bool recupDonnees = true; // true: la récupération des tarifs s'est bien passée, sinon false
+
+        // tant que la récupération des données s'est bien passée et qu'il reste des passagers ou des véhicules à comptabiliser
+        while (recupDonnees && (indexPassager < passagers.Count() || indexVehicule < vehicules.Count())){
+            if (indexPassager < passagers.Count()){
+                // on récupère le prix 
+                recupDonnees = tarifPassager(passagers[indexPassager].categorie, liaison, out prixPassager);
+                // on l'ajoute au total si tout s'est bien passé
+                if (recupDonnees){
+                    prixTotal += prixPassager;
+                }
+                indexPassager++; // passager suivant
+            }
+
+            if (indexVehicule < vehicules.Count()){
+                // on récupère le prix 
+                recupDonnees = tarifVehicule(vehicules[indexVehicule].categorie, liaison, out prixVehicule);
+                // on l'ajoute au total si tout s'est bien passé 
+                if (recupDonnees){
+                    prixTotal += prixVehicule;
+                }
+                indexVehicule++; // véhicule suivant
+            }
         }
+
+        afficherPrixTotal(prixTotal);
     }
 }

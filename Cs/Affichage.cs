@@ -88,4 +88,10 @@ partial class Programme {
         Console.WriteLine("10. Voiture de 4,80m et plus");
         Console.WriteLine("11. Camping-car ou véhicule de plus de 2,10m de haut");
     }
+
+    static void afficherPrixTotal(double prix){
+        Console.Clear();
+        Console.WriteLine("-- Prix total --\n\n");
+        Console.WriteLine($"{prix.ToString("#,##")}€"); // affiche le prix avec maximum 2 chiffres après la virgule 
+    }
 }
