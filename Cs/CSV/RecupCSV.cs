@@ -51,7 +51,7 @@ partial class Programme {
         return succes;
     }
 
-    static bool tarifsPassagers(CodeCategoriePassager passager, Liaison liaison, out double tarif){
+    static bool tarifPassager(CodeCategoriePassager passager, Liaison liaison, out double tarif){
         bool succes = false;
 
         string cheminAccess = "CSV/Tarifs/passagers.csv"; // de forme numéro du CodeCategoriePassager;tarifGroix-Lorient;tarifLePalais-Quiberon
@@ -79,7 +79,7 @@ partial class Programme {
         return succes;
     }
 
-    static bool tarifsVehicules(CodeCategorieVehicule vehicule, Liaison liaison, out double tarif){
+    static bool tarifVehicule(CodeCategorieVehicule vehicule, Liaison liaison, out double tarif){
         bool succes = false;
 
         string cheminAccess = "CSV/Tarifs/vehicules.csv"; // de forme numéro du CodeCategorieVehicule;tarifGroix-Lorient;tarifLePalais-Quiberon
