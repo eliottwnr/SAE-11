@@ -4,16 +4,16 @@ using System;
 partial class Programme { // partial permet de séparer en plusieurs fichiers une même classe
     public static void Main(){
         string[] horairesDuJour;
-        Liaison liaison = saisirLiaison();
-        Traversee traversee = new Traversee(liaison);
-        traversee.date = saisirDate();
+        Liaison liaisonAller = saisirLiaison();
+        Traversee traverseeAller = new Traversee(liaisonAller);
+        traverseeAller.date = saisirDate();
 
 
         // récupération des horaires du jour et de la liaison choisie
-        horairesJour(liaison, traversee.date[0], out horairesDuJour); // date[0] correspond au jour
-        traversee.heure = saisirHoraire(horairesDuJour);
+        horairesJour(liaisonAller, traverseeAller.date[0], out horairesDuJour); // date[0] correspond au jour
+        traverseeAller.heure = saisirHoraire(horairesDuJour);
 
-        afficherTraversee(traversee);
+        afficherTraversee(traverseeAller);
 
 
         // saisie des passagers et des véhicules
@@ -30,7 +30,47 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
         } while (autreVehicule());
 
 
-        Trajet trajetAller = new Trajet(traversee, passagers, vehicules);
+        Trajet trajetAller = new Trajet(traverseeAller, passagers, vehicules); // plus simple à passer en argument
+        trajetAller.prix = calculPrixTrajet(trajetAller);
+
+
+        // calcul du prix de l'aller 
+        double prixAller = calculPrixTrajet(trajetAller);
+
+        
+        // saisie du trajet retour s'il y en a un
+        bool retour = trajetRetour();
+
+        if (retour){
+            // on créée un nouveau trajet comme l'aller sauf que la liaison n'est pas saisie, ni les passagers et véhicules
+            Liaison liaisonRetour;
+
+            // si la valeur de la liaison de l'aller est divisible par 2 
+            // (donc Lorient-Groix ou Quiberon-Lepalais), on choisis la liaison avec la valeur d'avant (donc Groix-Lorient ou Lepalais-Quiberon)
+            if ((int) liaisonAller % 2 == 0){
+                liaisonRetour = (Liaison)((int)liaisonAller - 1);
+            }
+            // et inversement
+            else {
+                liaisonRetour = (Liaison)((int)liaisonAller + 1);
+            }
+
+            Traversee traverseeRetour = new Traversee(liaisonRetour);
+            traverseeRetour.date = saisirDate();
+
+            // récupération des horaires du jour et de la liaison choisie
+            horairesJour(liaisonRetour, traverseeRetour.date[0], out horairesDuJour); // date[0] correspond au jour
+            traverseeRetour.heure = saisirHoraire(horairesDuJour);
+
+            Trajet trajetRetour = new Trajet(traverseeRetour, passagers, vehicules);
+            
+            double prixRetour = calculPrixTrajet(trajetRetour); // calcul du prix du retour
+
+            afficherPrixTotal(prixAller + prixRetour);
+        }
+        else {
+            afficherPrixTotal(prixAller);
+        }
     }
 
     static double calculPrixTrajet(Trajet trajet){
