@@ -265,4 +265,8 @@ partial class Programme {
     static bool autreVehicule(){
         return validation("Y aura-t-il d'autres véhicules ? ");
     }
+
+    static bool trajetRetour(){
+        return validation("Y aura-t-il un trajet retour ? ");
+    }
 }
