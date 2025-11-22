@@ -4,12 +4,10 @@ using System;
 partial class Programme { // partial permet de séparer en plusieurs fichiers une même classe
     public static void Main(){
         string[] horairesDuJour;
-
         Liaison liaison = saisirLiaison();
-
         Traversee traversee = new Traversee(liaison);
-        
         traversee.date = saisirDate();
+
 
         // récupération des horaires du jour et de la liaison choisie
         horairesJour(liaison, traversee.date[0], out horairesDuJour); // date[0] correspond au jour
@@ -18,6 +16,7 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
         afficherTraversee(traversee);
 
 
+        // saisie des passagers et des véhicules
         List<Passager> passagers = new List<Passager>(); // On ne sait pas combien il y aura de passagers en avance
 
         do {
@@ -30,6 +29,11 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
             vehicules.Add(saisirVehicule());
         } while (autreVehicule());
 
+
+        Trajet trajetAller = new Trajet(traversee, passagers, vehicules);
+    }
+
+    static double calculPrixTrajet(Trajet trajet){
         // récupère le tarif de chaque véhicule et passager pour avoir le tarif total
         double prixTotal = 0;
         double prixPassager, prixVehicule;
@@ -40,10 +44,10 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
         bool recupDonnees = true; // true: la récupération des tarifs s'est bien passée, sinon false
 
         // tant que la récupération des données s'est bien passée et qu'il reste des passagers ou des véhicules à comptabiliser
-        while (recupDonnees && (indexPassager < passagers.Count() || indexVehicule < vehicules.Count())){
-            if (indexPassager < passagers.Count()){
+        while (recupDonnees && (indexPassager < trajet.passagers.Count() || indexVehicule < trajet.vehicules.Count())){
+            if (indexPassager < trajet.passagers.Count()){
                 // on récupère le prix 
-                recupDonnees = tarifPassager(passagers[indexPassager].categorie, liaison, out prixPassager);
+                recupDonnees = tarifPassager(trajet.passagers[indexPassager].categorie, trajet.traversee.liaison, out prixPassager);
                 // on l'ajoute au total si tout s'est bien passé
                 if (recupDonnees){
                     prixTotal += prixPassager;
@@ -51,9 +55,9 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
                 indexPassager++; // passager suivant
             }
 
-            if (indexVehicule < vehicules.Count()){
+            if (indexVehicule < trajet.vehicules.Count()){
                 // on récupère le prix 
-                recupDonnees = tarifVehicule(vehicules[indexVehicule].categorie, liaison, out prixVehicule);
+                recupDonnees = tarifVehicule(trajet.vehicules[indexVehicule].categorie, trajet.traversee.liaison, out prixVehicule);
                 // on l'ajoute au total si tout s'est bien passé 
                 if (recupDonnees){
                     prixTotal += prixVehicule;
@@ -61,7 +65,6 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
                 indexVehicule++; // véhicule suivant
             }
         }
-
-        afficherPrixTotal(prixTotal);
+        return prixTotal;
     }
 }
