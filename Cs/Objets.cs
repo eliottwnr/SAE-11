@@ -16,6 +16,19 @@ partial class Programme {
         }
     }
 
+    struct Trajet {
+        public Traversee traversee;
+        public List<Passager> passagers;
+        public List<Vehicule> vehicules;
+        public double prix;
+
+        public Trajet(Traversee t, List<Passager> p, List<Vehicule> v){
+            traversee = t;
+            passagers = p;
+            vehicules = v;
+        }
+    }
+
     // permet de représenter les Liaisons sous une forme plus explicite que des entiers
     enum Liaison {
         groix_lorient = 1, 
