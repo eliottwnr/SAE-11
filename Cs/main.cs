@@ -25,9 +25,11 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
 
         List<Vehicule> vehicules = new List<Vehicule>(); // On ne sait pas combien il y aura de véhicules en avance
 
-        do {
-            vehicules.Add(saisirVehicule());
-        } while (autreVehicule());
+        if (vehicule()){
+            do {
+                vehicules.Add(saisirVehicule());
+            } while (autreVehicule());
+        }
 
 
         Trajet trajetAller = new Trajet(traverseeAller, passagers, vehicules); // plus simple à passer en argument

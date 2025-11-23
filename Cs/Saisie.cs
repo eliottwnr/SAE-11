@@ -262,6 +262,10 @@ partial class Programme {
         return new Vehicule(quantite, categorie);
     }
 
+    static bool vehicule(){
+        return validation("Y aura-t-il un véhicule ? ");
+    }
+
     static bool autreVehicule(){
         return validation("Y aura-t-il d'autres véhicules ? ");
     }
