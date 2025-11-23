@@ -92,6 +92,6 @@ partial class Programme {
     static void afficherPrixTotal(double prix){
         Console.Clear();
         Console.WriteLine("-- Prix total --\n\n");
-        Console.WriteLine($"{prix.ToString("#,##")}€"); // affiche le prix avec maximum 2 chiffres après la virgule 
+        Console.WriteLine($"{prix.ToString("#.##")}€"); // affiche le prix avec maximum 2 chiffres après la virgule 
     }
 }
