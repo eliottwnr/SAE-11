@@ -1,17 +1,24 @@
 using System; 
+using System.Text.Json;
 
 // Programme principal
 partial class Programme { // partial permet de séparer en plusieurs fichiers une même classe
     public static void Main(){
         string[] horairesDuJour;
+
         Liaison liaisonAller = saisirLiaison();
-        Traversee traverseeAller = new Traversee(liaisonAller);
-        traverseeAller.date = saisirDate();
+        string nomReservation = saisirNomReservation();
+
+        Reservation traverseeAller = new Reservation(nomReservation, liaisonAller);
+
+        uint[] dateTemp = saisirDate();
+        traverseeAller.date = dateTemp[2].ToString("0000") + "-" + dateTemp[1].ToString("00") + "-" + dateTemp[0].ToString("00");
 
 
         // récupération des horaires du jour et de la liaison choisie
-        horairesJour(liaisonAller, traverseeAller.date[0], out horairesDuJour); // date[0] correspond au jour
-        traverseeAller.heure = saisirHoraire(horairesDuJour);
+        horairesJour(liaisonAller, dateTemp[0], out horairesDuJour); // date[0] correspond au jour
+        uint[] horaireTemp = saisirHoraire(horairesDuJour);
+        traverseeAller.heure = horaireTemp[0].ToString("00") + ":" + horaireTemp[1].ToString("00");
 
         afficherTraversee(traverseeAller);
 
@@ -33,8 +40,8 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
 
 
         Trajet trajetAller = new Trajet(traverseeAller, passagers, vehicules); // plus simple à passer en argument
-        trajetAller.prix = calculPrixTrajet(trajetAller);
-
+        List<Trajet> trajets = new List<Trajet>();
+        trajets.Add(trajetAller);
 
         // calcul du prix de l'aller 
         double prixAller = calculPrixTrajet(trajetAller);
@@ -57,22 +64,31 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
                 liaisonRetour = (Liaison)((int)liaisonAller + 1);
             }
 
-            Traversee traverseeRetour = new Traversee(liaisonRetour);
-            traverseeRetour.date = saisirDate();
+            Reservation traverseeRetour = new Reservation(nomReservation, liaisonRetour);
+            dateTemp = saisirDate();
+            traverseeRetour.date = dateTemp[2] + "-" + dateTemp[1] + "-" + dateTemp[0];
+
 
             // récupération des horaires du jour et de la liaison choisie
-            horairesJour(liaisonRetour, traverseeRetour.date[0], out horairesDuJour); // date[0] correspond au jour
-            traverseeRetour.heure = saisirHoraire(horairesDuJour);
+            horairesJour(liaisonRetour, dateTemp[0], out horairesDuJour); // date[0] correspond au jour
+            horaireTemp = saisirHoraire(horairesDuJour);
+            traverseeRetour.heure = horaireTemp[0] + ":" + horaireTemp[1];
+
+
 
             Trajet trajetRetour = new Trajet(traverseeRetour, passagers, vehicules);
             
             double prixRetour = calculPrixTrajet(trajetRetour); // calcul du prix du retour
 
             afficherPrixTotal(prixAller + prixRetour);
+
+            trajets.Add(trajetRetour);
         }
         else {
             afficherPrixTotal(prixAller);
         }
+
+        creerJson(trajets);
     }
 
     static double calculPrixTrajet(Trajet trajet){
@@ -89,7 +105,7 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
         while (recupDonnees && (indexPassager < trajet.passagers.Count() || indexVehicule < trajet.vehicules.Count())){
             if (indexPassager < trajet.passagers.Count()){
                 // on récupère le prix 
-                recupDonnees = tarifPassager(trajet.passagers[indexPassager].categorie, trajet.traversee.liaison, out prixPassager);
+                recupDonnees = tarifPassager(trajet.passagers[indexPassager].categorie, trajet.traversee.idLiaison, out prixPassager);
                 // on l'ajoute au total si tout s'est bien passé
                 if (recupDonnees){
                     prixTotal += prixPassager;
@@ -99,7 +115,7 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
 
             if (indexVehicule < trajet.vehicules.Count()){
                 // on récupère le prix 
-                recupDonnees = tarifVehicule(trajet.vehicules[indexVehicule].categorie, trajet.traversee.liaison, out prixVehicule);
+                recupDonnees = tarifVehicule(trajet.vehicules[indexVehicule].categorie, trajet.traversee.idLiaison, out prixVehicule);
                 // on l'ajoute au total si tout s'est bien passé 
                 if (recupDonnees){
                     prixTotal += prixVehicule;
@@ -108,5 +124,17 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
             }
         }
         return prixTotal;
+    }
+
+    static void creerJson(List<Trajet> trajets){
+        string json = JsonSerializer.Serialize(trajets, new JsonSerializerOptions {
+            WriteIndented = true,
+            IncludeFields = true,
+            Converters = { 
+                new System.Text.Json.Serialization.JsonStringEnumConverter() 
+                }
+        });
+
+        File.WriteAllText("trajet.json", json);    
     }
 }

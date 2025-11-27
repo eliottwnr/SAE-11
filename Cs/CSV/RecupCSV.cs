@@ -51,7 +51,7 @@ partial class Programme {
         return succes;
     }
 
-    static bool tarifPassager(CodeCategoriePassager passager, Liaison liaison, out double tarif){
+    static bool tarifPassager(CodeCategoriePassager passager, uint liaison, out double tarif){
         bool succes = false;
 
         string cheminAccess = "CSV/Tarifs/passagers.csv"; // de forme numéro du CodeCategoriePassager;tarifGroix-Lorient;tarifLePalais-Quiberon
@@ -62,7 +62,7 @@ partial class Programme {
 
         uint indiceLiaison = 0; // 0 pour groix / lorient et 1 pour le palais / quiberon
 
-        if ((uint) liaison <= 2){ // groix-lorient et lorient-groix
+        if (liaison <= 2){ // groix-lorient et lorient-groix
             indiceLiaison = 0;
         }
         else { // lepalais-quiberon et quiberon-lepalais
@@ -79,7 +79,7 @@ partial class Programme {
         return succes;
     }
 
-    static bool tarifVehicule(CodeCategorieVehicule vehicule, Liaison liaison, out double tarif){
+    static bool tarifVehicule(CodeCategorieVehicule vehicule, uint liaison, out double tarif){
         bool succes = false;
 
         string cheminAccess = "CSV/Tarifs/vehicules.csv"; // de forme numéro du CodeCategorieVehicule;tarifGroix-Lorient;tarifLePalais-Quiberon
@@ -90,7 +90,7 @@ partial class Programme {
 
         uint indiceLiaison = 0; // 0 pour groix / lorient et 1 pour le palais / quiberon
 
-        if ((uint) liaison <= 2){ // groix-lorient et lorient-groix
+        if (liaison <= 2){ // groix-lorient et lorient-groix
             indiceLiaison = 0;
         }
         else { // lepalais-quiberon et quiberon-lepalais

@@ -3,29 +3,33 @@ using System;
 // Contient tout ce qui est en rapport avec le stockage de données (temporaires / au moment de l'exécution)
 // structures, énumérations, etc... 
 partial class Programme {
-    struct Traversee {
-        public Liaison liaison;
-        public uint[] date;
-        public uint[] heure;
+    struct Reservation {
+        public string nom;
+        public uint idLiaison;
+        public string date;
+        public string heure;
+        public string horodatage;
 
-        public Traversee(Liaison l){
-            liaison = l;
+        public Reservation(string n, Liaison l){
+            nom = n;
+            idLiaison = (uint)l;
 
-            date = new uint[3]; // Jour, Mois, Année 
-            heure = new uint[2]; // Heures, Minutes
+            date = ""; // format YYYY-MM-DD
+            heure = ""; // format 09:45
+            horodatage = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         }
     }
 
     struct Trajet {
-        public Traversee traversee;
+        public Reservation traversee;
         public List<Passager> passagers;
         public List<Vehicule> vehicules;
-        public double prix;
 
-        public Trajet(Traversee t, List<Passager> p, List<Vehicule> v){
+        public Trajet(Reservation t, List<Passager> p, List<Vehicule> v){
             traversee = t;
             passagers = p;
             vehicules = v;
+
         }
     }
 
@@ -73,8 +77,8 @@ partial class Programme {
     }
 
     struct Vehicule {
-        public uint quantite;
         public CodeCategorieVehicule categorie;
+        public uint quantite;
 
         public Vehicule(uint q, CodeCategorieVehicule c){
             quantite = q;

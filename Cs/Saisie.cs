@@ -273,4 +273,16 @@ partial class Programme {
     static bool trajetRetour(){
         return validation("Y aura-t-il un trajet retour ? ");
     }
+
+    static string saisirNomReservation(){
+        string? saisie;
+
+        do {
+            Console.Write("Saisir le nom de la réservation : ");
+            saisie = Console.ReadLine();
+        } while (saisie == null);
+
+
+        return saisie;
+    }
 }

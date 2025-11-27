@@ -35,25 +35,25 @@ partial class Programme {
         }
     }
 
-    static void afficherTraversee(Traversee traversee){
+    static void afficherTraversee(Reservation traversee){
         Console.Clear();
         Console.WriteLine("-- Résumé de la traversée --\n\n");
 
         Console.Write("Liaison : ");
-        switch (traversee.liaison){
-            case Liaison.groix_lorient:
+        switch (traversee.idLiaison){
+            case 1: // Liaison.groix_lorient
                 Console.WriteLine("Groix - Lorient");
                 break;
 
-            case Liaison.lorient_groix:
+            case 2: // Liaison.lorient_groix
                 Console.WriteLine("Lorient - Groix");
                 break;
 
-            case Liaison.quiberon_lepalais:
+            case 3: // Liaison.quiberon_lepalais
                 Console.WriteLine("Quiberon - Le Palais");
                 break;
 
-            case Liaison.lepalais_quiberon:
+            case 4: // Liaison.lepalais_quiberon
                 Console.WriteLine("Le Palais - Quiberon");
                 break;
 
