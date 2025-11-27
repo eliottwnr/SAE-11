@@ -1,17 +1,28 @@
-{
-  "nom": "Addams",
-  "idLiaison": 1,
-  "date": "01112025",
-  "heure": "0945",
-  "passagers": [
-    { "nom": "Addams", "prenom": "Gomez", "codeCategorie": "adu26p" },
-    { "nom": "Addams", "prenom": "Morticia", "codeCategorie": "adu26p" },
-    { "nom": "Addams", "prenom": "Lurch", "codeCategorie": "jeu1825" },
-    { "nom": "Addams", "prenom": "Mercredi", "codeCategorie": "enf417" },
-    { "nom": "Addams", "prenom": "Pugsley", "codeCategorie": "bebe" }
-  ],
-  "vehicules": [
-    { "codeCategorie": "cat4", "quantite": 1 },
-    { "codeCategorie": "trot", "quantite": 2 }
-  ]
-}
+[
+  {
+    "traversee": {
+      "nom": "Wanner",
+      "idLiaison": 2,
+      "date": "2025-11-27",
+      "heure": "13:45",
+      "horodatage": "2025-11-27 12:17:37"
+    },
+    "passagers": [
+      {
+        "nom": "Wanner",
+        "prenom": "Eliott",
+        "categorie": "bebe"
+      }
+    ],
+    "vehicules": [
+      {
+        "categorie": "trot",
+        "quantite": 10
+      },
+      {
+        "categorie": "velo",
+        "quantite": 2
+      }
+    ]
+  }
+]

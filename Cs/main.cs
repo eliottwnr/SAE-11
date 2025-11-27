@@ -96,33 +96,28 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
         double prixTotal = 0;
         double prixPassager, prixVehicule;
 
-        int indexPassager = 0;
-        int indexVehicule = 0;
-
         bool recupDonnees = true; // true: la récupération des tarifs s'est bien passée, sinon false
 
-        // tant que la récupération des données s'est bien passée et qu'il reste des passagers ou des véhicules à comptabiliser
-        while (recupDonnees && (indexPassager < trajet.passagers.Count() || indexVehicule < trajet.vehicules.Count())){
-            if (indexPassager < trajet.passagers.Count()){
-                // on récupère le prix 
-                recupDonnees = tarifPassager(trajet.passagers[indexPassager].categorie, trajet.traversee.idLiaison, out prixPassager);
-                // on l'ajoute au total si tout s'est bien passé
-                if (recupDonnees){
-                    prixTotal += prixPassager;
-                }
-                indexPassager++; // passager suivant
-            }
+        foreach (Passager p in trajet.passagers){
+            recupDonnees = tarifPassager(p.categorie, trajet.traversee.idLiaison, out prixPassager);
 
-            if (indexVehicule < trajet.vehicules.Count()){
-                // on récupère le prix 
-                recupDonnees = tarifVehicule(trajet.vehicules[indexVehicule].categorie, trajet.traversee.idLiaison, out prixVehicule);
-                // on l'ajoute au total si tout s'est bien passé 
-                if (recupDonnees){
+            if (recupDonnees){
+                prixTotal += prixPassager;
+            }
+            Console.WriteLine(p.nom);
+        }
+
+        foreach (Vehicule v in trajet.vehicules){
+            recupDonnees = tarifVehicule(v.categorie, trajet.traversee.idLiaison, out prixVehicule);
+
+            if (recupDonnees){
+                for (int i = 0; i < v.quantite; i++){
                     prixTotal += prixVehicule;
                 }
-                indexVehicule++; // véhicule suivant
             }
+            Console.WriteLine(v.categorie);
         }
+
         return prixTotal;
     }
 
@@ -135,6 +130,6 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
                 }
         });
 
-        File.WriteAllText("trajet.json", json);    
+        File.WriteAllText("../Web/reservation.json", json);    
     }
 }

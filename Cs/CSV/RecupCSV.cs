@@ -90,10 +90,7 @@ partial class Programme {
 
         uint indiceLiaison = 0; // 0 pour groix / lorient et 1 pour le palais / quiberon
 
-        if (liaison <= 2){ // groix-lorient et lorient-groix
-            indiceLiaison = 0;
-        }
-        else { // lepalais-quiberon et quiberon-lepalais
+        if (liaison > 2){ 
             indiceLiaison = 1;
         }
 
