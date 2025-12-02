@@ -107,7 +107,6 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
             if (recupDonnees){
                 prixTotal += prixPassager;
             }
-            Console.WriteLine(p.nom);
         }
 
         foreach (Vehicule v in trajet.vehicules){
@@ -119,7 +118,6 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
                     prixTotal += prixVehicule;
                 }
             }
-            Console.WriteLine(v.categorie);
         }
 
         return prixTotal;
