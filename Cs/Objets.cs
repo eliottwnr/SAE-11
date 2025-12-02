@@ -15,7 +15,7 @@ partial class Programme {
             idLiaison = (uint)l;
 
             date = ""; // format YYYY-MM-DD
-            heure = ""; // format 09:45
+            heure = ""; // format HH:mm
             horodatage = DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss");
         }
     }
@@ -29,7 +29,6 @@ partial class Programme {
             traversee = t;
             passagers = p;
             vehicules = v;
-
         }
     }
 

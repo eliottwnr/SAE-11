@@ -31,7 +31,7 @@ partial class Programme {
 
         nbHoraires = horaires.Length;
         for (i = 0; i < nbHoraires; i++){
-            Console.WriteLine((i + 1) + ". " + horaires[i]);
+            Console.WriteLine((i + 1) + ". " + horaires[i]); // (i + 1) car l'indice commence à 0 et la liste à 1
         }
     }
 
@@ -61,7 +61,7 @@ partial class Programme {
                 break;
         }
 
-        Console.WriteLine($"Date : {traversee.date[0]}/{traversee.date[1]}/{traversee.date[2]}"); // $ permet de formater la chaîne
+        Console.WriteLine($"Date : {traversee.date[0]}/{traversee.date[1]}/{traversee.date[2]}"); // '$' permet de formater la chaîne
         Console.WriteLine($"Heure : {traversee.heure[0]}:{traversee.heure[1]}");
     }
 

@@ -20,7 +20,8 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
         uint[] horaireTemp = saisirHoraire(horairesDuJour);
         traverseeAller.heure = horaireTemp[0].ToString("00") + ":" + horaireTemp[1].ToString("00");
 
-        afficherTraversee(traverseeAller);
+        // debug
+        // afficherTraversee(traverseeAller);
 
 
         // saisie des passagers et des véhicules
@@ -75,9 +76,11 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
             traverseeRetour.heure = horaireTemp[0] + ":" + horaireTemp[1];
 
 
-
             Trajet trajetRetour = new Trajet(traverseeRetour, passagers, vehicules);
             
+            // debug 
+            // afficherTraversee(traverseeRetour);
+
             double prixRetour = calculPrixTrajet(trajetRetour); // calcul du prix du retour
 
             afficherPrixTotal(prixAller + prixRetour);
@@ -111,6 +114,7 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
             recupDonnees = tarifVehicule(v.categorie, trajet.traversee.idLiaison, out prixVehicule);
 
             if (recupDonnees){
+                // puisque la quantitée est donnée pour chaque Vehicule
                 for (int i = 0; i < v.quantite; i++){
                     prixTotal += prixVehicule;
                 }
@@ -123,8 +127,8 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
 
     static void creerJson(List<Trajet> trajets){
         string json = JsonSerializer.Serialize(trajets, new JsonSerializerOptions {
-            WriteIndented = true,
-            IncludeFields = true,
+            WriteIndented = true, // fais de beaux retours à la ligne dans le .json
+            IncludeFields = true, // permet d'inclure tous les champs de trajet
             Converters = { 
                 new System.Text.Json.Serialization.JsonStringEnumConverter() 
                 }
