@@ -21,12 +21,12 @@ partial class Programme {
     }
 
     struct Trajet {
-        public Reservation traversee;
+        public Reservation reservation;
         public List<Passager> passagers;
         public List<Vehicule> vehicules;
 
         public Trajet(Reservation t, List<Passager> p, List<Vehicule> v){
-            traversee = t;
+            reservation = t;
             passagers = p;
             vehicules = v;
         }

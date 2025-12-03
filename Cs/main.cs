@@ -102,7 +102,7 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
         bool recupDonnees = true; // true: la récupération des tarifs s'est bien passée, sinon false
 
         foreach (Passager p in trajet.passagers){
-            recupDonnees = tarifPassager(p.categorie, trajet.traversee.idLiaison, out prixPassager);
+            recupDonnees = tarifPassager(p.categorie, trajet.reservation.idLiaison, out prixPassager);
 
             if (recupDonnees){
                 prixTotal += prixPassager;
@@ -110,7 +110,7 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
         }
 
         foreach (Vehicule v in trajet.vehicules){
-            recupDonnees = tarifVehicule(v.categorie, trajet.traversee.idLiaison, out prixVehicule);
+            recupDonnees = tarifVehicule(v.categorie, trajet.reservation.idLiaison, out prixVehicule);
 
             if (recupDonnees){
                 // puisque la quantitée est donnée pour chaque Vehicule

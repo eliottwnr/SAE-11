@@ -1,28 +1,36 @@
 [
   {
-    "traversee": {
+    "reservation": {
       "nom": "Wanner",
-      "idLiaison": 2,
-      "date": "2025-11-27",
-      "heure": "13:45",
-      "horodatage": "2025-11-27 12:17:37"
+      "idLiaison": 1,
+      "date": "2025-11-11",
+      "heure": "11:00",
+      "horodatage": "2025-12-03 13:44:47"
     },
     "passagers": [
       {
         "nom": "Wanner",
         "prenom": "Eliott",
-        "categorie": "bebe"
+        "categorie": "jeu1825"
       }
     ],
-    "vehicules": [
+    "vehicules": []
+  },
+  {
+    "reservation": {
+      "nom": "Wanner",
+      "idLiaison": 2,
+      "date": "2025-11-12",
+      "heure": "13:45",
+      "horodatage": "2025-12-03 13:45:00"
+    },
+    "passagers": [
       {
-        "categorie": "trot",
-        "quantite": 10
-      },
-      {
-        "categorie": "velo",
-        "quantite": 2
+        "nom": "Wanner",
+        "prenom": "Eliott",
+        "categorie": "jeu1825"
       }
-    ]
+    ],
+    "vehicules": []
   }
 ]
