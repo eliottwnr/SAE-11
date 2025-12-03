@@ -10,6 +10,10 @@ partial class Programme {
         Console.WriteLine("Saisie incorrecte !");
     }
 
+    static void AfficherVehiculeDansListe(){
+        Console.WriteLine("Le type de véhicule choisi à déjà été saisi !");
+    }
+
     static void afficherLiaisons(){
         Console.Clear(); // nettoie la console
         Console.WriteLine("-- Choix de la liaison --\n\n");
