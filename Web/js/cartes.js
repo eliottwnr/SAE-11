@@ -4,7 +4,7 @@ fetch('reservation.json')
     afficherCartes(reservation);
   })
   .catch(err => {
-    document.getElementById('cartes-container').textContent = 'Erreur de chargement du fichier JSON.';
+    document.getElementById('cartes-container').textContent = 'Erreur de chargement de la réservation';
   });
 
 function afficherCartes(data) {
@@ -31,16 +31,16 @@ function afficherCartes(data) {
 
 function getNomLiaison(id) {
   switch (id) {
-    case 1: return "Lorient → Groix";
-    case 2: return "Groix → Lorient";
-    case 3: return "Quiberon → Le Palais";
-    case 4: return "Le Palais → Quiberon";
+    case 1: return "Lorient --> Groix";
+    case 2: return "Groix --> Lorient";
+    case 3: return "Quiberon --> Le Palais";
+    case 4: return "Le Palais --> Quiberon";
     default: return "?";
   }
 }
 function getCategorieLibelle(c) {
   switch (c) {
-    case 'adu26p': return 'Adulte (≥ 26 ans)';
+    case 'adu26p': return 'Adulte (>= 26 ans)';
     case 'jeu1825': return 'Jeune (18-25 ans)';
     case 'enf417': return 'Enfant (4-17 ans)';
     case 'bebe': return 'Bébé (< 4 ans)';
