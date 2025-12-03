@@ -67,16 +67,7 @@ partial class Programme
         string[] tarifs;
         string[] ligne;
 
-        uint indiceLiaison = 1; // 0 pour groix / lorient et 1 pour le palais / quiberon
-
-        if (liaison <= 2)
-        { // groix-lorient et lorient-groix
-            indiceLiaison = 2;
-        }
-        else
-        { // lepalais-quiberon et quiberon-lepalais
-            indiceLiaison = 1;
-        }
+        uint indiceLiaison = 0; // 0 pour groix / lorient et 1 pour le palais / quiberon
 
         succes = lireFichier(cheminAccess, out tarifs);
         nbLignesFichier = tarifs.Length;
@@ -98,7 +89,7 @@ partial class Programme
     {
         bool succes = false;
         tarif = 0;
-        string cheminAccess = "CSV/Tarifs/vehicules.csv";
+        string cheminAccess = "CSV/Tarifs/vehicules.csv"; // de forme numéro du CodeCategorieVehicule;tarifGroix-Lorient;tarifLePalais-Quiberon
         string[] tarifs;
 
         succes = lireFichier(cheminAccess, out tarifs);
@@ -114,7 +105,7 @@ partial class Programme
             indiceLiaison = 1; // vers Le Palais
         }
 
-        tarif = double.Parse(ligne[indiceLiaison], CultureInfo.InvariantCulture);
+        tarif = double.Parse(ligne[indiceLiaison], CultureInfo.InvariantCulture); // sélectionne le bon tarif de la ligne 
 
         return true;
     }
