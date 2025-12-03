@@ -251,13 +251,13 @@ partial class Programme {
         CodeCategorieVehicule categorie = saisirCategorieVehicule();
         
         do {
-            Console.Write("Saisir la quantité : ");
+            Console.Write("Saisir la quantité (doit être inférieure à 10): ");
             saisie = Console.ReadLine();
             saisieJuste = uint.TryParse(saisie, out quantite);
-            if (!saisieJuste || quantite < 1){
+            if (!saisieJuste || quantite < 1 || quantite > 10){
                 afficherSaisieIncorrecte();
             }
-        } while (!saisieJuste || quantite < 1);
+        } while (!saisieJuste || quantite < 1 || quantite > 10);
 
         return new Vehicule(quantite, categorie);
     }
