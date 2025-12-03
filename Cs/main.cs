@@ -35,7 +35,25 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
 
         if (vehicule()){
             do {
-                vehicules.Add(saisirVehicule());
+                // On vérifie qu'il n'y a pas déjà un véhicule de ce type dans la liste
+                Vehicule nouveau = saisirVehicule();
+                bool estDansListe = false;
+                int i = 0;
+
+                while (!estDansListe && i < vehicules.Count()){
+                    if (vehicules[i].categorie == nouveau.categorie){
+                        estDansListe = true;
+                    }
+                    i++;
+                }
+
+                if (estDansListe){
+                    AfficherVehiculeDansListe();
+                }
+                else {
+                    vehicules.Add(nouveau);
+                }
+
             } while (autreVehicule());
         }
 
