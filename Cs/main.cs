@@ -94,7 +94,7 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
             bool dateValideAvecHoraires = false;
 
             do { // Tant qu'aucune date n'est valide
-                dateTemp = saisirDate(dateAller);
+                dateTemp = saisirDate();
 
                 // récupération des horaires du jour et de la liaison choisie
                 horairesJour(liaisonRetour, dateTemp[0], out horairesDuJour); // date[0] correspond au jour
