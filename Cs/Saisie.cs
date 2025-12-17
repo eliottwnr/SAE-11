@@ -285,4 +285,9 @@ partial class Programme {
 
         return saisie;
     }
+
+    static void attendre(){
+        Console.Write("Appuyer sur Entrée pour continuer");
+        Console.ReadLine();
+    }
 }
