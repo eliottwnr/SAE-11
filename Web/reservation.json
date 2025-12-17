@@ -3,34 +3,64 @@
     "reservation": {
       "nom": "Wanner",
       "idLiaison": 1,
-      "date": "2025-11-11",
+      "date": "2025-11-10",
       "heure": "11:00",
-      "horodatage": "2025-12-03 13:44:47"
+      "horodatage": "2025-12-17 17:09:36"
     },
     "passagers": [
       {
         "nom": "Wanner",
         "prenom": "Eliott",
-        "categorie": "jeu1825"
+        "codeCategorie": "jeu1825"
+      },
+      {
+        "nom": "Bouzaiene",
+        "prenom": "Amine",
+        "codeCategorie": "jeu1825"
+      },
+      {
+        "nom": "Gallusser",
+        "prenom": "Noah",
+        "codeCategorie": "jeu1825"
       }
     ],
-    "vehicules": []
+    "vehicules": [
+      {
+        "codeCategorie": "cat2",
+        "quantite": 1
+      }
+    ]
   },
   {
     "reservation": {
       "nom": "Wanner",
       "idLiaison": 2,
-      "date": "2025-11-12",
-      "heure": "13:45",
-      "horodatage": "2025-12-03 13:45:00"
+      "date": "2025-11-20",
+      "heure": "6:50",
+      "horodatage": "2025-12-17 17:10:15"
     },
     "passagers": [
       {
         "nom": "Wanner",
         "prenom": "Eliott",
-        "categorie": "jeu1825"
+        "codeCategorie": "jeu1825"
+      },
+      {
+        "nom": "Bouzaiene",
+        "prenom": "Amine",
+        "codeCategorie": "jeu1825"
+      },
+      {
+        "nom": "Gallusser",
+        "prenom": "Noah",
+        "codeCategorie": "jeu1825"
       }
     ],
-    "vehicules": []
+    "vehicules": [
+      {
+        "codeCategorie": "cat2",
+        "quantite": 1
+      }
+    ]
   }
 ]
