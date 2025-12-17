@@ -11,14 +11,14 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
 
         Reservation traverseeAller = new Reservation(nomReservation, liaisonAller);
 
-        uint[] dateTemp = saisirDate();
-        traverseeAller.date = dateTemp[2].ToString("0000") + "-" + dateTemp[1].ToString("00") + "-" + dateTemp[0].ToString("00");
+        uint[] dateTempAller = saisirDate();
+        traverseeAller.date = dateTempAller[2].ToString("0000") + "-" + dateTempAller[1].ToString("00") + "-" + dateTempAller[0].ToString("00");
 
 
         // récupération des horaires du jour et de la liaison choisie
-        horairesJour(liaisonAller, dateTemp[0], out horairesDuJour); // date[0] correspond au jour
-        uint[] horaireTemp = saisirHoraire(horairesDuJour);
-        traverseeAller.heure = horaireTemp[0].ToString("00") + ":" + horaireTemp[1].ToString("00");
+        horairesJour(liaisonAller, dateTempAller[0], out horairesDuJour); // date[0] correspond au jour
+        uint[] horaireTempAller = saisirHoraire(horairesDuJour);
+        traverseeAller.heure = horaireTempAller[0].ToString("00") + ":" + horaireTempAller[1].ToString("00");
 
         // debug
         // afficherTraversee(traverseeAller);
@@ -85,14 +85,32 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
 
             Reservation traverseeRetour = new Reservation(nomReservation, liaisonRetour);
 
-            dateTemp = saisirDate();
-            traverseeRetour.date = dateTemp[2] + "-" + dateTemp[1] + "-" + dateTemp[0];
+            uint[] dateTempRetour;
+            uint[] horaireTempRetour;
+            bool dateValide, horaireValide;
 
+            do {
+                dateTempRetour = saisirDate();
 
-            // récupération des horaires du jour et de la liaison choisie
-            horairesJour(liaisonRetour, dateTemp[0], out horairesDuJour); // date[0] correspond au jour
-            horaireTemp = saisirHoraire(horairesDuJour);
-            traverseeRetour.heure = horaireTemp[0] + ":" + horaireTemp[1];
+                // récupération des horaires du jour et de la liaison choisie
+                horairesJour(liaisonRetour, dateTempRetour[0], out horairesDuJour); // date[0] correspond au jour
+                horaireTempRetour = saisirHoraire(horairesDuJour);
+
+                dateValide = dateAnterieure(dateTempAller, dateTempRetour);
+                horaireValide = horaireAnterieur(horaireTempAller, horaireTempRetour);
+
+                if (!dateValide){
+                    afficherDateNonAnterieure();
+                    attendre();
+                }
+                else if (dateValide && !horaireValide){
+                    afficherHoraireNonAnterieure();
+                    attendre();
+                }
+            } while ((dateValide && !horaireValide) || !dateValide);
+
+            traverseeRetour.date = dateTempRetour[2] + "-" + dateTempRetour[1] + "-" + dateTempRetour[0];
+            traverseeRetour.heure = horaireTempRetour[0] + ":" + horaireTempRetour[1];
 
 
             Trajet trajetRetour = new Trajet(traverseeRetour, passagers, vehicules);
@@ -140,6 +158,44 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
         }
 
         return prixTotal;
+    }
+
+    static bool dateAnterieure(uint[] date1, uint[] date2){
+        // Renvoie true si date1 <= date2, sinon false
+        bool estAnterieure = false;
+        bool memeAnnee = (date1[2] == date2[2]);
+        bool memeMois = (date1[1] == date2[1]);
+        bool memeJour = (date1[0] == date2[0]);
+
+        if (date1[2] < date2[2]){
+            estAnterieure = true;
+        }
+        else if (memeAnnee && date1[1] < date2[1]){
+            estAnterieure = true;
+        }
+        else if (memeAnnee && memeMois && date1[0] < date2[0]){
+            estAnterieure = true;
+        }
+        else if (memeAnnee && memeMois && memeJour){
+            estAnterieure = true;
+        }
+
+        return estAnterieure;
+    }
+
+    static bool horaireAnterieur(uint[] h1, uint[] h2){
+        // Renvoie true si h1 < h2, sinon false
+        bool estAnterieur = false;
+        bool memeHeure = (h1[0] == h2[0]);
+
+        if (h1[0] < h2[0]){
+            estAnterieur = true;
+        }
+        else if (memeHeure && h1[1] < h2[1]){
+            estAnterieur = true;
+        }
+
+        return estAnterieur;
     }
 
     static void creerJson(List<Trajet> trajets){
