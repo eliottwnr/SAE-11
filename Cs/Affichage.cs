@@ -98,4 +98,12 @@ partial class Programme {
         Console.WriteLine("-- Prix total --\n\n");
         Console.WriteLine($"{prix.ToString("#.##")}€"); // affiche le prix avec maximum 2 chiffres après la virgule 
     }
+
+    static void afficherDateNonAnterieure(){
+        Console.WriteLine("La date saisie n'est pas antérieure à la date du trajet aller !");
+    }
+
+    static void afficherHoraireNonAnterieure(){
+        Console.WriteLine("L'horaire saisie n'est pas antérieure à l'horaire du trajet aller !");
+    }
 }
