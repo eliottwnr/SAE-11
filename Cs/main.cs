@@ -103,11 +103,13 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
                     afficherDateNonAnterieure();
                     attendre();
                 }
-                else if (dateValide && !horaireValide){
-                    afficherHoraireNonAnterieure();
-                    attendre();
+
+                // si c'est le même jour mais que l'horaire retour est avant l'aller
+                else if (dateTempRetour[0] == dateTempAller[0] && !horaireValide){
+                        afficherHoraireNonAnterieure();
+                        attendre();
                 }
-            } while ((dateValide && !horaireValide) || !dateValide);
+            } while (!dateValide || (dateTempRetour[0] == dateTempAller[0] && !horaireValide));
 
             traverseeRetour.date = dateTempRetour[2] + "-" + dateTempRetour[1] + "-" + dateTempRetour[0];
             traverseeRetour.heure = horaireTempRetour[0] + ":" + horaireTempRetour[1];

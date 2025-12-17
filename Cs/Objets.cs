@@ -34,10 +34,10 @@ partial class Programme {
 
     // permet de représenter les Liaisons sous une forme plus explicite que des entiers
     enum Liaison {
-        groix_lorient = 1, 
-        lorient_groix = 2, 
-        lepalais_quiberon = 3,
-        quiberon_lepalais = 4
+        lorient_groix = 1, 
+        groix_lorient = 2, 
+        quiberon_lepalais = 3,
+        lepalais_quiberon = 4
     }
 
     // valeurs correspondent à la ligne dans le .csv
