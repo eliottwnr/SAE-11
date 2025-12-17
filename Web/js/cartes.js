@@ -1,151 +1,96 @@
-let cartesActuelles = [];
-let indexCarte = 0;
+const API = "https://can.iutrs.unistra.fr/api";
 
-function getNomLiaison(idLiaison) {
-    const liaisons = {
-        1: 'Lorient - Groix',
-        2: 'Groix - Lorient',
-        3: 'Quiberon - Le Palais',
-        4: 'Le Palais - Quiberon'
-    };
-    return liaisons[idLiaison] || 'Inconnue';
-}
-
-function getNomBateau(idLiaison) {
-    return (idLiaison === 1 || idLiaison === 2) ? 'Breizh Nevez' : 'Vindilis';
-}
-
-function formatDate(dateStr) {
-    const [annee, mois, jour] = dateStr.split('-');
-    return `${jour}/${mois}/${annee}`;
-}
-
-function creerCartes(data) {
-    const reservation = data.reservation;
-    const passagers = data.passagers;
-    const vehicules = data.vehicules;
-    const cartes = [];
-
-    passagers.forEach((p, i) => {
-        const carte = {
-            type: 'passager',
-            nom: p.nom,
-            prenom: p.prenom,
-            categorie: p.categorie,
-            liaison: getNomLiaison(reservation.idLiaison),
-            date: formatDate(reservation.date),
-            heure: reservation.heure,
-            bateau: getNomBateau(reservation.idLiaison),
-        };
-        cartes.push(carte);
-    });
-
-    if (vehicules && vehicules.length > 0) {
-        vehicules.forEach(v => {
-            for (let i = 0; i < v.quantite; i++) {
-                const carte = {
-                    type: 'vehicule',
-                    categorie: v.codeCategorie,
-                    liaison: getNomLiaison(reservation.idLiaison),
-                    date: formatDate(reservation.date),
-                    heure: reservation.heure,
-                    bateau: getNomBateau(reservation.idLiaison),
-                };
-                cartes.push(carte);
-            }
-        });
-    }
-
-    return cartes;
-}
-
-function afficherCarte(index) {
-    const container = document.getElementById('cartes-container');
-
-    if (cartesActuelles.length === 0) {
-        container.innerHTML = '<p>Aucune carte à afficher</p>';
-        return;
-    }
-
-    const carte = cartesActuelles[index];
-
-    let html = '';
-    if (carte.type === 'passager') {
-        html = `
-            <div class="carte-embarquement">
-                <h2>Carte d'embarquement - Passager</h2>
-                <div class="carte-info">
-                    <p><strong>Nom:</strong> ${carte.nom}</p>
-                    <p><strong>Prénom:</strong> ${carte.prenom}</p>
-                    <p><strong>Catégorie:</strong> ${carte.categorie}</p>
-                    <p><strong>Liaison:</strong> ${carte.liaison}</p>
-                    <p><strong>Date:</strong> ${carte.date}</p>
-                    <p><strong>Heure de départ:</strong> ${carte.heure}</p>
-                    <p><strong>Bateau:</strong> ${carte.bateau}</p>
-                </div>
-            </div>
-        `;
-    } else {
-        html = `
-            <div class="carte-embarquement">
-                <h2>Carte d'embarquement - Véhicule</h2>
-                <div class="carte-info">
-                    <p><strong>Type:</strong> ${carte.categorie}</p>
-                    <p><strong>Liaison:</strong> ${carte.liaison}</p>
-                    <p><strong>Date:</strong> ${carte.date}</p>
-                    <p><strong>Heure de départ:</strong> ${carte.heure}</p>
-                    <p><strong>Bateau:</strong> ${carte.bateau}</p>
-                </div>
-            </div>
-        `;
-    }
-
-    container.innerHTML = html;
-
-    document.getElementById('compteur-cartes').textContent = `Carte ${index + 1} / ${cartesActuelles.length}`;
-
-    document.getElementById('btn-precedent').disabled = (index === 0);
-    document.getElementById('btn-suivant').disabled = (index === cartesActuelles.length - 1);
-}
-
-function cartePrecedente() {
-    if (indexCarte > 0) {
-        indexCarte--;
-        afficherCarte(indexCarte);
-    }
-}
-
-function carteSuivante() {
-    if (indexCarte < cartesActuelles.length - 1) {
-        indexCarte++;
-        afficherCarte(indexCarte);
-    }
-}
-
-fetch('./reservation.json')
-    .then(response => response.json())
-    .then(reservations => {
-        reservations.forEach(item => {
-            const cartes = creerCartes(item);
-            cartesActuelles = cartesActuelles.concat(cartes);
-        });
-
-        if (cartesActuelles.length > 0) {
-            indexCarte = 0;
-            afficherCarte(indexCarte);
-        } else {
-            document.getElementById('cartes-container').innerHTML = '<p>Aucune carte trouvée</p>';
-        }
-    })
-    .catch(err => {
-        console.error('Erreur:', err);
-        document.getElementById('cartes-container').textContent = 'Erreur de chargement de la réservation';
-    });
-
-document.addEventListener('DOMContentLoaded', function() {
-    const btnPrev = document.getElementById('btn-precedent');
-    const btnNext = document.getElementById('btn-suivant');
-
-    if (btnPrev) btnPrev.addEventListener('click', cartePrecedente);
-    if (btnNext) btnNext.addEventListener('click', carteSuivante);
+document.addEventListener("DOMContentLoaded", () => {
+    chargerCartes();
 });
+
+async function chargerCartes() {
+    const params = new URLSearchParams(window.location.search);
+    const resId = params.get("id");
+
+    // Remplit le champ de saisie avec l'id
+    const input = document.getElementById("resId");
+    if (input) {
+        input.value = resId;
+    }
+
+    try {
+        // Récup des infos de la réservations
+        const rep = await fetch(API + "/reservation/" + resId);
+        const reservation = await rep.json();
+        // Zone passager et véhicule (séparés)
+        const zonePassagers = document.getElementById("hote-passagers");
+        const zoneVehicules = document.getElementById("hote-vehicules");
+        // le template pour les cartes
+        const template = document.getElementById("modele-carte");
+
+        // Vider les zones pour créer les nouvelles cartes
+        zonePassagers.innerHTML = "";
+        zoneVehicules.innerHTML = "";
+        // Création de la carte passager
+        for (let num = 1; num <= reservation.nbPassagers; num++) {
+            const repPassager = await fetch(
+                API + "/reservation/" + resId + "/passager/" + num
+            );
+            const passager = await repPassager.json();
+
+            const carte = creerCarte(template);
+            remplirCarte(carte, {
+                liaison: reservation.portDepart + " > " + reservation.portArrivee,
+                date: reservation.date,
+                horaire: reservation.heure,
+                code: passager.libelleCategorie,
+                nom: passager.prenom + " " + passager.nom,
+                qte: 1
+            });
+
+            zonePassagers.appendChild(carte);
+        }
+        // Même chose ici mais pour les véhicules
+        for (let num = 1; num <= reservation.nbVehicules; num++) {
+            const repVehicule = await fetch(
+                API + "/reservation/" + resId + "/vehicule/" + num
+            );
+            const vehicule = await repVehicule.json();
+
+            const carte = creerCarte(template);
+            remplirCarte(carte, {
+                liaison: reservation.portDepart + " > " + reservation.portArrivee,
+                date: reservation.date,
+                horaire: reservation.heure,
+                code: vehicule.libelle,
+                nom: reservation.nom,
+                qte: vehicule.quantite
+            });
+
+            zoneVehicules.appendChild(carte);
+        }
+
+        document.getElementById("etat-vide").style.display = "none";
+
+        if (reservation.nbPassagers > 0) {
+            document.getElementById("section-passagers").classList.remove("cache");
+        }
+
+        if (reservation.nbVehicules > 0) {
+            document.getElementById("section-vehicules").classList.remove("cache");
+        }
+
+    } catch (e) {
+        console.error("Erreur lors du chargement :", e);
+    }
+}
+
+function creerCarte(template) {
+    return template.content.cloneNode(true);
+}
+
+// Remplit les données dans la carte
+function remplirCarte(carte, infos) {
+    carte.querySelector('[data-lier="liaison"]').textContent = infos.liaison;
+    carte.querySelector('[data-lier="date"]').textContent = infos.date;
+    carte.querySelector('[data-lier="horaire"]').textContent = infos.horaire;
+    carte.querySelector('[data-lier="code"]').textContent = infos.code;
+    carte.querySelector('[data-lier="nom"]').textContent = infos.nom;
+    carte.querySelector('[data-lier="qte"]').textContent = infos.qte;
+}
