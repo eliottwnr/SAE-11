@@ -165,3 +165,27 @@
   margin: 0;
   padding-left: 18px;
 }
+
+.titre-categorie {
+  margin: 20px 0 10px 0;
+  border-bottom: 2px solid var(--accent);
+  padding-bottom: 5px;
+  font-size: 1.2rem;
+}
+
+.grille-cartes {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 15px;
+  margin-bottom: 30px;
+}
+
+.carte:hover {
+  transform: translateY(-2px); /* direction (ici vers le haut) */
+  border-color: var(--accent); /* met la couleur "accent" de base.css */
+  transition: transform 0.4s; /* l'animation pendant le hover dure 0.2s */
+}
+
+.carte {
+  transition: transform 0.4s, border-color 0.4s; /* retour à la normal aussi animé */
+}
