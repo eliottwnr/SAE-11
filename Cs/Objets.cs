@@ -66,22 +66,22 @@ partial class Programme {
 
     struct Passager {
         public string nom, prenom;
-        public CodeCategoriePassager categorie;
+        public CodeCategoriePassager codeCategorie;
 
         public Passager(string n, string p, CodeCategoriePassager c){
             nom = n;
             prenom = p;
-            categorie = c;
+            codeCategorie = c;
         }
     }
 
     struct Vehicule {
-        public CodeCategorieVehicule categorie;
+        public CodeCategorieVehicule codeCategorie;
         public uint quantite;
 
         public Vehicule(uint q, CodeCategorieVehicule c){
             quantite = q;
-            categorie = c;
+            codeCategorie = c;
         }
     }
 }

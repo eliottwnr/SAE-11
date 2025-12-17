@@ -41,7 +41,7 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
                 int i = 0;
 
                 while (!estDansListe && i < vehicules.Count()){
-                    if (vehicules[i].categorie == nouveau.categorie){
+                    if (vehicules[i].codeCategorie == nouveau.codeCategorie){
                         estDansListe = true;
                     }
                     i++;
@@ -139,7 +139,7 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
         bool recupDonnees = true; // true: la récupération des tarifs s'est bien passée, sinon false
 
         foreach (Passager p in trajet.passagers){
-            recupDonnees = tarifPassager(p.categorie, trajet.reservation.idLiaison, out prixPassager);
+            recupDonnees = tarifPassager(p.codeCategorie, trajet.reservation.idLiaison, out prixPassager);
 
             if (recupDonnees){
                 prixTotal += prixPassager;
@@ -147,7 +147,7 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
         }
 
         foreach (Vehicule v in trajet.vehicules){
-            recupDonnees = tarifVehicule(v.categorie, trajet.reservation.idLiaison, out prixVehicule);
+            recupDonnees = tarifVehicule(v.codeCategorie, trajet.reservation.idLiaison, out prixVehicule);
 
             if (recupDonnees){
                 // puisque la quantitée est donnée pour chaque Vehicule
