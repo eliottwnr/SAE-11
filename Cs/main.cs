@@ -1,6 +1,5 @@
-using System;
+using System; 
 using System.Text.Json;
-using System.Collections.Generic;
 
 // Programme principal
 partial class Programme { // partial permet de séparer en plusieurs fichiers une même classe
@@ -12,19 +11,18 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
 
         Reservation traverseeAller = new Reservation(nomReservation, liaisonAller);
 
-        // Saisie de la date ALLER
         uint[] dateTemp = saisirDate();
         traverseeAller.date = dateTemp[2].ToString("0000") + "-" + dateTemp[1].ToString("00") + "-" + dateTemp[0].ToString("00");
 
+
         // récupération des horaires du jour et de la liaison choisie
         horairesJour(liaisonAller, dateTemp[0], out horairesDuJour); // date[0] correspond au jour
-        
-        // Saisie de l'horaire ALLER
         uint[] horaireTemp = saisirHoraire(horairesDuJour);
         traverseeAller.heure = horaireTemp[0].ToString("00") + ":" + horaireTemp[1].ToString("00");
 
         // debug
         // afficherTraversee(traverseeAller);
+
 
         // saisie des passagers et des véhicules
         List<Passager> passagers = new List<Passager>(); // On ne sait pas combien il y aura de passagers en avance
@@ -59,23 +57,19 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
             } while (autreVehicule());
         }
 
+
         Trajet trajetAller = new Trajet(traverseeAller, passagers, vehicules); // plus simple à passer en argument
         List<Trajet> trajets = new List<Trajet>();
         trajets.Add(trajetAller);
 
         // calcul du prix de l'aller 
         double prixAller = calculPrixTrajet(trajetAller);
+
         
         // saisie du trajet retour s'il y en a un
         bool retour = trajetRetour();
-        // S'il y a un retour:
-        if (retour){
-            // Clone() fait une copie indépendante, pour éviter que les deux variables pointent vers le meêm tableau 
-            // ça permet de comparer l'horraire aller et l'horraire retour 
-            // ça permet aussi d'éviter de faire une structure ou une fonction 'copierTableau'.
-            uint[] dateAller = (uint[])dateTemp.Clone(); // saisirDate() modifie datetemp et par conséquent dateAller sera modifié aussi, donc la date de départ deviendra la date de retour, ce qu'on veut éviter
-            uint[] horaireAller = (uint[])horaireTemp.Clone();
 
+        if (retour){
             // on créée un nouveau trajet comme l'aller sauf que la liaison n'est pas saisie, ni les passagers et véhicules
             Liaison liaisonRetour;
 
@@ -90,51 +84,16 @@ partial class Programme { // partial permet de séparer en plusieurs fichiers un
             }
 
             Reservation traverseeRetour = new Reservation(nomReservation, liaisonRetour);
-            
-            bool dateValideAvecHoraires = false;
 
-            do { // Tant qu'aucune date n'est valide
-                dateTemp = saisirDate();
-
-                // récupération des horaires du jour et de la liaison choisie
-                horairesJour(liaisonRetour, dateTemp[0], out horairesDuJour); // date[0] correspond au jour
-                // Verif si c'est le même jour
-                bool memeJour = (dateTemp[0] == dateAller[0] && dateTemp[1] == dateAller[1] && dateTemp[2] == dateAller[2]);
-                // Si c'est le même jour alors :
-                if (memeJour) {
-                    List<string> horairesValides = new List<string>(); // Nouvelle liste avec les futurs horraires valides, s'il y en a
-                    
-                    int minutesAller = (int)(horaireAller[0] * 60 + horaireAller[1]); // Converti les heures en minute (heure*60+minutes)
-
-                    foreach (string h in horairesDuJour){ 
-                        string[] parties = h.Split(':'); // Sépare la date avec "enlevant" ':', pour récupérer d'un côté l'heure et de l'autre les minutes pour permettre la conversion en minute
-                        int minutesRetour = int.Parse(parties[0]) * 60 + int.Parse(parties[1]); 
-
-                        // Strictement supérieur pour éviter de prendre un horaire où l'aller se fait même temps que le retour (ou avant)
-                        if (minutesRetour > minutesAller) { 
-                            horairesValides.Add(h); 
-                        }
-                    }
-
-                    if (horairesValides.Count == 0) { // Si le jour même il n'y a plus d'horraire valide
-                        Console.WriteLine("\nAucun horaire de retour n'est disponible ce jour là");
-                        Console.WriteLine("Appuyez sur Entrée pour trouver un autre horaire");
-                        Console.ReadLine();
-                        dateValideAvecHoraires = false;
-                    } else {
-                        horairesDuJour = horairesValides.ToArray();
-                        dateValideAvecHoraires = true;
-                    }
-                } else {
-                    dateValideAvecHoraires = true;
-                }
-
-            } while (!dateValideAvecHoraires);
-
+            dateTemp = saisirDate();
             traverseeRetour.date = dateTemp[2] + "-" + dateTemp[1] + "-" + dateTemp[0];
 
+
+            // récupération des horaires du jour et de la liaison choisie
+            horairesJour(liaisonRetour, dateTemp[0], out horairesDuJour); // date[0] correspond au jour
             horaireTemp = saisirHoraire(horairesDuJour);
             traverseeRetour.heure = horaireTemp[0] + ":" + horaireTemp[1];
+
 
             Trajet trajetRetour = new Trajet(traverseeRetour, passagers, vehicules);
             
