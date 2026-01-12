@@ -1,21 +1,34 @@
-const tarifsPassagers = {
-    'adu26p': { 'groix': 18.75, 'belle-ile': 18.80 },
-    'jeu1825': { 'groix': 13.80, 'belle-ile': 14.10 },
-    'enf417': { 'groix': 11.25, 'belle-ile': 11.65 },
-    'bebe': { 'groix': 0, 'belle-ile': 0 },
-    'ancomp': { 'groix': 3.35, 'belle-ile': 3.35 }
-};
+const API_BASE = "https://can.iutrs.unistra.fr/api";
 
-const tarifsVehicules = {
-    'trot': { 'groix': 4.70, 'belle-ile': 4.70 },
-    'velo': { 'groix': 8.20, 'belle-ile': 8.20 },
-    'velelec': { 'groix': 11.00, 'belle-ile': 11.00 },
-    'cartand': { 'groix': 16.45, 'belle-ile': 16.45 },
-    'mobil': { 'groix': 23.10, 'belle-ile': 23.35 },
-    'moto': { 'groix': 66.05, 'belle-ile': 66.40 },
-    'cat1': { 'groix': 96.05, 'belle-ile': 98.50 },
-    'cat2': { 'groix': 114.80, 'belle-ile': 117.20 },
-    'cat3': { 'groix': 174.45, 'belle-ile': 176.90 },
-    'cat4': { 'groix': 210.90, 'belle-ile': 213.35 },
-    'camp': { 'groix': 330.20, 'belle-ile': 332.70 }
-};
+async function chargerStats() {
+    try {
+        const resL = await fetch(`${API_BASE}/liaison/all`);
+        const liaisons = await resL.json();
+        
+        let caGlobal = 0;
+        const container = document.querySelector('[data-role="stats-liaisons"]');
+        container.innerHTML = "";
+
+        for (const l of liaisons) {
+            const resC = await fetch(`${API_BASE}/liaison/${l.id}/chiffreAffaire`);
+            const data = await resC.json();
+            
+            const totalLiaison = data.passagers.chiffreAffaire + data.vehicules.chiffreAffaire;
+            caGlobal += totalLiaison;
+
+            container.innerHTML += `
+                <article class="carte-stat">
+                    <header>${l.nom}</header>
+                    <ul>
+                        <li>CA : <strong>${totalLiaison.toFixed(2)} €</strong></li>
+                        <li>Passagers : ${data.passagers.nombre}</li>
+                        <li>Véhicules : ${data.vehicules.quantite}</li>
+                    </ul>
+                </article>`;
+        }
+
+        document.querySelector('[data-lier="caGlobal"]').textContent = `${caGlobal.toFixed(2)} €`;
+    } catch (e) { console.error(e); }
+}
+
+chargerStats();

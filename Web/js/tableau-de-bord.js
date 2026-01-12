@@ -1,12 +1,42 @@
-const capacitesBateaux = {
-    'Breizh Nevez': { passagers: 450, vehicules: 60 },  
-    'Vindilis': { passagers: 600, vehicules: 85 }       
+const API_BASE = "https://can.iutrs.unistra.fr/api";
+
+const LIAISONS_MAP = {
+    "lorient-groix": 1,
+    "groix-lorient": 2,
+    "quiberon-lepalais": 3,
+    "lepalais-quiberon": 4
 };
 
-// Horaire des trajets
-const horaires = {
-    1: ['07:00', '09:45', '11:00', '14:30', '17:30'],  // pour Lorient vers Groix
-    2: ['08:15', '10:45', '13:00', '15:45', '18:30'],  // pour Groix vers Lorient
-    3: ['07:30', '09:15', '11:45', '14:00', '17:00'],  // pour Quiberon vers Le Palais
-    4: ['08:45', '10:30', '13:15', '15:30', '18:15']   // pour Le Palais vers Quiberon
+document.querySelector('form').onsubmit = async (e) => {
+    e.preventDefault();
+    const formData = new FormData(e.target);
+    const liaisonKey = formData.get('liaison');
+    const date = formData.get('date');
+    const idLiaison = LIAISONS_MAP[liaisonKey];
+
+    const res = await fetch(`${API_BASE}/liaison/${idLiaison}/remplissage/${date}`);
+    const donnees = await res.json();
+
+    const container = document.querySelector('[data-role="traversees"]');
+    container.innerHTML = "";
+
+    donnees.forEach(t => {
+        const txPassagers = Math.round((t.nbReservationPassagers / t.capacitePassagers) * 100);
+        const txVehicules = Math.round((t.nbReservationVoitures / t.capaciteVoitures) * 100);
+
+        container.innerHTML += `
+            <article class="carte-tableau">
+                <header>${t.heure}</header>
+                <div class="barres">
+                    <div class="barre">
+                        <span>Passagers (${txPassagers}%)</span>
+                        <div style="background: lightblue; width: ${txPassagers}%">&nbsp;</div>
+                    </div>
+                    <div class="barre">
+                        <span>Véhicules (${txVehicules}%)</span>
+                        <div style="background: orange; width: ${txVehicules}%">&nbsp;</div>
+                    </div>
+                </div>
+            </article>`;
+    });
 };
