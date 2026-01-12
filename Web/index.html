@@ -2,7 +2,7 @@
 <html lang="fr">
 <head>
   <meta charset="utf-8">
-  <title>CAN Accueil</title>
+  <title>Accueil</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <link href="./css/base.css" rel="stylesheet">
   <link href="./css/global.css" rel="stylesheet">
@@ -10,7 +10,7 @@
 </head>
 <body class="conteneur">
   <header class="entete">
-    <h1 class="marque">CAN Après-vente</h1>
+    <h1 class="marque">CAN - Accueil</h1>
     <nav class="navigation">
       <a href="./index.html" class="actif">Accueil</a>
       <a href="./cartes.html">Cartes</a>
@@ -23,24 +23,53 @@
   <nav class="fil-ariane" aria-label="Vous êtes ici">
     <ol>
       <li><a href="./index.html">Accueil</a></li>
-      <li aria-current="page">Accueil</li>
+      <li aria-current="page">Portail de gestion</li>
     </ol>
   </nav>
 
   <main class="principal">
-    <section class="carte-bloc">
-      <h2>Retrouver une réservation</h2>
-      <form class="formulaire-ligne" action="./cartes.html" method="get">
-        <label for="res">Numéro de réservation</label>
-        <input id="res" name="id" type="text" placeholder="Saisir le numéro" required>
-        <button type="submit">Voir les cartes</button>
-      </form>
-      <div class="liens">
-        <form class="formulaire-ligne" action="./facture.html" method="get">
-          <input name="id" type="text" placeholder="Saisir le numéro" required>
-          <button type="submit">Voir facture</button>
+    <section>
+      <h2>Bienvenue sur l'outil de gestion de la CAN</h2>
+    </section>
+
+    <section class="grille-stats">
+      
+      <article class="carte-stat">
+        <header>Embarquement</header>
+        <p>Générez les cartes d'embarquement des passagers et des véhicules :</p>
+        <form class="formulaire-ligne" action="./cartes.html" method="get" style="margin-top: 10px;">
+          <input name="id" type="text" placeholder="N° de réservation" required style="min-width: 100%; margin-bottom: 8px;">
+          <button type="submit" style="width: 100%;">Rechercher les cartes</button>
         </form>
-      </div>
+      </article>
+
+      <article class="carte-stat">
+        <header>Facturation</header>
+        <p>Consultez les détails de votre facture : <br/><br/></p>
+        <form class="formulaire-ligne" action="./facture.html" method="get" style="margin-top: 10px;">
+          <input name="id" type="text" placeholder="N° de réservation" required style="min-width: 100%; margin-bottom: 8px;">
+          <button type="submit" style="width: 100%;">Générer la facture</button>
+        </form>
+      </article>
+
+      <article class="carte-stat">
+        <header>Analyse</header>
+        <p>Accédez aux statistiques mensuels ou au tableau de bord de chaque voyage:</p>
+        <div style="display: flex; flex-direction: column; gap: 8px; margin-top: 10px;">
+            <a href="./tableau-de-bord.html" class="pastille couleur-neon" style="text-align: center; padding: 10px;">Tableau de bord</a>
+            <a href="./statistiques.html" class="pastille" style="text-align: center; padding: 10px; background: #1f2937;">Statistiques mensuelles</a>
+        </div>
+      </article>
+
+    </section>
+
+    <section class="carte-bloc" style="border-style: dashed; opacity: 0.8;">
+      <h3>Aide à l'utilisation</h3>
+      <ul class="liste-liens attenue">
+        <li>Utilisez l'identifiant de votre facture pour générer vos cartes d'embarquements</li>
+        <li>Les données sont mises à jour en temps réels, vous pouvez retrouver votre facture et vos cartes d'embarquement tout de suite après votre achat</li>
+        <li>En cas de problème d'utilisation, la CAN reste à votre disposition pour vous aider</li>
+      </ul>
     </section>
   </main>
 
