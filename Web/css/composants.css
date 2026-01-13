@@ -5,7 +5,13 @@
   border: 1px dashed #334155;
   border-radius: 12px;
   padding: 12px;
-  background: #0b1220;
+  background: var(--bloc); 
+  transition: transform 0.4s, border-color 0.4s;
+}
+
+.carte:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent);
 }
 
 .carte-entete {
@@ -25,11 +31,18 @@
   color: var(--attenue);
 }
 
-.carte-corps {
+.carte-stat, .carte-tableau, .carte-bloc {
+  background: var(--bloc);
+  border: 1px solid #1f2937;
+  border-radius: 10px;
+  padding: 12px;
   display: flex;
   flex-direction: column;
-  gap: 6px;
+  gap: 10px;
 }
+
+.carte-stat { width: 300px; }
+.carte-tableau { width: 260px; }
 
 .pastille {
   padding: 2px 8px;
@@ -39,56 +52,48 @@
   font-size: 0.85rem;
 }
 
-.couleur-ok {
-  background: #083a1d;
-  color: #86efac;
-}
+.couleur-ok { background: #083a1d; color: #86efac; }
+.couleur-avert { background: #3a2b08; color: #fde68a; }
+.couleur-alerte { background: #3a0f0f; color: #fecaca; }
+.couleur-neon { background: #303a00; color: var(--neon); }
 
-.couleur-avert {
-  background: #3a2b08;
-  color: #fde68a;
-}
+.barres { display: flex; flex-direction: column; gap: 6px; }
+.barre { display: flex; justify-content: space-between; }
 
-.couleur-alerte {
-  background: #3a0f0f;
-  color: #fecaca;
-}
-
-.couleur-neon {
-  background: #303a00;
-  color: var(--neon);
-}
-
-.tableau {
+.formulaire-ligne {
   display: flex;
-  flex-direction: column;
-  gap: 6px;
+  gap: 8px;
+  align-items: center;
+  flex-wrap: wrap;
 }
 
+.formulaire-ligne input, .formulaire-ligne select {
+  padding: 8px;
+  border-radius: 8px;
+  border: 1px solid #1f2937;
+  background: #0b1220;
+  color: var(--texte);
+  min-width: 240px;
+}
+
+.formulaire-ligne button {
+  padding: 8px 12px;
+  border-radius: 8px;
+  border: 1px solid #1f2937;
+  background: #0b1220;
+  color: var(--texte);
+  cursor: pointer;
+}
+
+.tableau { display: flex; flex-direction: column; gap: 6px; }
 .ligne {
   display: grid;
   grid-template-columns: 80px 1fr 60px 80px 100px;
   gap: 8px;
   padding: 4px 0;
 }
+.ligne.entete { border-bottom: 1px solid #1f2937; font-weight: 600; }
 
-.ligne.entete {
-  border-bottom: 1px solid #1f2937;
-  font-weight: 600;
-}
-
-.facture-totaux {
-  display: flex;
-  flex-direction: column;
-  gap: 6px;
-  margin-top: 8px;
-}
-
-.totaux-ligne {
-  display: flex;
-  justify-content: space-between;
-}
-
-.totaux-ligne.important {
-  font-size: 1.1rem;
-}
+.facture-totaux { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+.totaux-ligne { display: flex; justify-content: space-between; }
+.totaux-ligne.important { font-size: 1.1rem; font-weight: 600; }
