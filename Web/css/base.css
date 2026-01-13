@@ -1,3 +1,7 @@
+/*
+Couleurs et styles de base, les piliers sur lesquels s'appuie le reste du design 
+Liste de code couleur trouvé d'internet pour du mode sombre, que j'ai modifié à ma sauce.
+*/
 :root {
   --fond: #0f172a;
   --texte: #e2e8f0;

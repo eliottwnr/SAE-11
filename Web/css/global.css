@@ -36,10 +36,14 @@
 .fil-ariane [aria-current="page"] { color: var(--texte); }
 
 .grille-cartes {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  display: flex;
+  flex-wrap: wrap;
   gap: 15px;
   margin-bottom: 30px;
+}
+
+.grille-cartes .carte {
+  flex: 1 1 350px; 
 }
 
 .grille-tableau, .grille-stats, .hote-cartes {

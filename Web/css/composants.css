@@ -85,15 +85,85 @@
   cursor: pointer;
 }
 
-.tableau { display: flex; flex-direction: column; gap: 6px; }
+.tableau { 
+  display: flex; 
+  flex-direction: column; 
+  gap: 6px; 
+}
+
 .ligne {
-  display: grid;
-  grid-template-columns: 80px 1fr 60px 80px 100px;
+  display: flex; 
   gap: 8px;
-  padding: 4px 0;
+  padding: 8px 0;
+  align-items: center;
+  width: 100%;
+}
+
+/* 
+Définition des largeurs des colonnes
+L'usage d'un display grid serait beaucoup plus simple et rapide mais il faut respecter les contraintes du sujet
+J'ai donc du chercher une solution avec flexbox sur internet et j'ai trouvé ça 
+L'implémentation n'était pas facile du tout, j'ai dû sollicité l'IA pour m'aider, qui a elle même eu du mal
+Maintenant ça fonctionne correctement, eu importe la taille de l'écran et du téléphone ça s'affichera comme il se doit
+*/
+.ligne > div { flex: 1; } 
+.ligne > div:nth-child(1) { flex: 0 0 15%; } 
+.ligne > div:nth-child(2) { flex: 2; }      
+.ligne > div:nth-child(3) { flex: 0 0 10%; } 
+.ligne > div:nth-child(4) { flex: 0 0 15%; } 
+.ligne > div:nth-child(5) { flex: 0 0 20%; text-align: right; } 
+
+/* réduit la police si l'écran est trop petit */
+@media (max-width: 480px) {
+  .ligne {
+    font-size: 0.75rem;
+    gap: 4px;
+  }
 }
 .ligne.entete { border-bottom: 1px solid #1f2937; font-weight: 600; }
 
 .facture-totaux { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
 .totaux-ligne { display: flex; justify-content: space-between; }
 .totaux-ligne.important { font-size: 1.1rem; font-weight: 600; }
+
+.barres {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.barre {
+  display: flex;
+  flex-direction: column; 
+  gap: 6px;
+}
+
+.jauge-fond {
+  width: 100%;
+  background: #1e293b; 
+  height: 10px;
+  border-radius: 5px;
+  overflow: hidden;
+}
+
+.jauge-remplissage {
+  height: 100%;
+}
+
+.couleur-ok { background-color: var(--ok); }
+.couleur-avert { background-color: var(--avert); }
+.couleur-alerte { background-color: var(--alerte); }
+.couleur-neon { background-color: var(--neon); }
+
+.carte-stat {
+    border-left: 4px solid var(--accent); 
+    padding: 20px;
+}
+
+.bandeau-total {
+    background: linear-gradient(90deg, var(--bloc) 0%, #1e293b 100%);
+    border: 2px solid var(--accent);
+    padding: 25px;
+    border-radius: 12px;
+    text-align: center;
+}
