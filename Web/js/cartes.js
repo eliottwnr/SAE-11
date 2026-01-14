@@ -11,11 +11,6 @@ async function chargerCartes() {
     const params = new URLSearchParams(window.location.search);
     const resId = params.get("id");
 
-    if (!resId) {
-        document.getElementById("etat-vide").style.display = "block";
-        return; 
-    }
-
     // Remplit le champ de saisie avec l'id pour que l'utilisateur sache ce qu'il regarde
     const input = document.getElementById("resId");
     if (input) {
