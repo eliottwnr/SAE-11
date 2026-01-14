@@ -54,7 +54,8 @@ async function chargerCartes() {
                 horaire: reservation.heure,
                 code: passager.libelleCategorie,
                 nom: passager.prenom + " " + passager.nom,
-                qte: 1 // Un passager = une carte
+                qte: 1, // Un passager = une carte
+                reservationId: resId
             });
 
             // On ajoute la carte finie dans la zone des passagers
@@ -76,7 +77,8 @@ async function chargerCartes() {
                 horaire: reservation.heure,
                 code: vehicule.libelle, 
                 nom: reservation.nom, 
-                qte: vehicule.quantite
+                qte: vehicule.quantite,
+                reservationId: resId
             });
 
             zoneVehicules.appendChild(carte);
@@ -113,4 +115,16 @@ function remplirCarte(carte, infos) {
     carte.querySelector('[data-lier="code"]').textContent = infos.code;
     carte.querySelector('[data-lier="nom"]').textContent = infos.nom;
     carte.querySelector('[data-lier="qte"]').textContent = infos.qte;
+    
+    // Générer le QR code pour le numéro de réservation
+    const qrElement = carte.querySelector('[data-lier="qr"]'); // emplacement du qr code
+    if (qrElement && infos.reservationId) {
+        genererQRCode(qrElement, infos.reservationId);
+    }
+}
+
+// Génère un QR code en utilisant une API externe
+function genererQRCode(element, reservationId) {
+    const qrUrl = `https://api.qrserver.com/v1/create-qr-code/?size=80x80&data=${encodeURIComponent(reservationId)}`; // taille 80x80 et données = id réservation
+    element.innerHTML = `<img src="${qrUrl}" alt="QR Code ${reservationId}" style="width: 100%; height: 100%; border-radius: 4px;">`; 
 }
