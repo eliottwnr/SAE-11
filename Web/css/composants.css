@@ -41,6 +41,43 @@
   gap: 10px;
 }
 
+.carte-bloc {
+  padding: 24px;
+  gap: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+}
+
+.carte-bloc h2 {
+  margin: 0;
+  font-size: 1.4rem;
+  color: var(--accent);
+  text-align: center;
+  font-weight: 700;
+}
+
+.qr-container {
+  display: flex;
+  justify-content: center;
+  margin-top: 12px;
+  padding-top: 12px;
+  border-top: 1px solid #1f2937;
+}
+
+.qr-code {
+  width: 80px;
+  height: 80px;
+  background: #fff;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 10px;
+  color: #000;
+  text-align: center;
+  padding: 4px;
+  box-sizing: border-box;
+}
+
 .carte-stat { width: 300px; }
 .carte-tableau { width: 260px; }
 
@@ -157,13 +194,53 @@ Maintenant ça fonctionne correctement, eu importe la taille de l'écran et du t
 
 .carte-stat {
     border-left: 4px solid var(--accent); 
-    padding: 20px;
+    padding: 24px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
+
+
+
+.carte-stat header {
+    font-size: 1.2rem;
+    font-weight: 700;
+    color: var(--accent);
+    margin-bottom: 16px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid #1f2937;
+}
+
+.carte-stat ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.carte-stat li {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 0;
+    border-bottom: 1px solid rgba(31, 41, 55, 0.5);
+}
+
+.carte-stat li:last-child {
+    border-bottom: none;
+}
+
+.carte-stat li span {
+    font-weight: 600;
+    color: var(--texte);
+    font-size: 1.1rem;
 }
 
 .bandeau-total {
-    background: linear-gradient(90deg, var(--bloc) 0%, #1e293b 100%);
     border: 2px solid var(--accent);
-    padding: 25px;
-    border-radius: 12px;
+    padding: 30px;
+    border-radius: 16px;
     text-align: center;
+    font-size: 1.5rem;
 }
+
