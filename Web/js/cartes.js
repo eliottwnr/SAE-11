@@ -84,9 +84,6 @@ async function chargerCartes() {
             zoneVehicules.appendChild(carte);
         }
 
-        // Si on a des données, on cache le message "aucun résultat"
-        document.getElementById("etat-vide").style.display = "none";
-
         // On affiche les sections passagers/véhicules seulement s'il y en a
         if (reservation.nbPassagers > 0) {
             document.getElementById("section-passagers").classList.remove("cache");
