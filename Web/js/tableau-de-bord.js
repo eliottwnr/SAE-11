@@ -39,21 +39,39 @@ document.querySelector('form').onsubmit = async (e) => {
             const txV = Math.round((t.nbReservationVoitures / t.capaciteVoitures) * 100); // taux véhicules
 
             // Logique pour les couleurs demandées dans l'énoncé (selon le remplissage véhicules)
-            let couleurClass = "";
-            let txtClass = "";
+            let couleurClassV = "";
+            let txtClassV = "";
 
             if (txV <= 50) { // si taux véhicules <= 50% alors..
-                couleurClass = "couleur-ok";    // Vert
-                txtClass = "txt-ok";
+                couleurClassV = "couleur-ok";    // Vert
+                txtClassV = "txt-ok";
             } else if (txV <= 75) {
-                couleurClass = "couleur-avert"; // Orange
-                txtClass = "txt-avert";
+                couleurClassV = "couleur-avert"; // Orange
+                txtClassV = "txt-avert";
             } else if (txV <= 100) {
-                couleurClass = "couleur-alerte"; // Rouge
-                txtClass = "txt-alerte";
+                couleurClassV = "couleur-alerte"; // Rouge
+                txtClassV = "txt-alerte";
             } else {
-                couleurClass = "couleur-neon";   // Jaune fluo si on dépasse 100%
-                txtClass = "txt-neon";
+                couleurClassV = "couleur-neon";   // Jaune fluo si on dépasse 100%
+                txtClassV = "txt-neon";
+            }
+
+            // Logique de couleur identique appliquée aux passagers
+            let couleurClassP = "";
+            let txtClassP = "";
+
+            if (txP <= 50) {
+                couleurClassP = "couleur-ok";
+                txtClassP = "txt-ok";
+            } else if (txP <= 75) {
+                couleurClassP = "couleur-avert";
+                txtClassP = "txt-avert";
+            } else if (txP <= 100) {
+                couleurClassP = "couleur-alerte";
+                txtClassP = "txt-alerte";
+            } else {
+                couleurClassP = "couleur-neon";
+                txtClassP = "txt-neon";
             }
 
             // Injection du HTML pour chaque carte
@@ -67,20 +85,20 @@ document.querySelector('form').onsubmit = async (e) => {
                         <div class="barre">
                             <div style="display:flex; justify-content:space-between">
                                 <span>Passagers</span>
-                                <span>${txP}%</span>
+                                <span class="${txtClassP}">${txP}%</span>
                             </div>
                             <div class="jauge-fond">
-                                <div class="jauge-remplissage" style="background:var(--accent); width:${txP}%"></div>
+                                <div class="jauge-remplissage ${couleurClassP}" style="width:${txP}%"></div>
                             </div>
                         </div>
                         
                         <div class="barre">
                             <div style="display:flex; justify-content:space-between">
                                 <span>Véhicules</span>
-                                <span class="${txtClass}">${txV}%</span>
+                                <span class="${txtClassV}">${txV}%</span>
                             </div>
                             <div class="jauge-fond">
-                                <div class="jauge-remplissage ${couleurClass}" style="width:${txV}%"></div>
+                                <div class="jauge-remplissage ${couleurClassV}" style="width:${txV}%"></div>
                             </div>
                         </div>
 
