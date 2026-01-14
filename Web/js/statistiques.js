@@ -38,7 +38,7 @@ async function chargerStats() {
                 <article class="carte-stat">
                     <header>${l.nom}</header>
                     <ul>
-                        <li>CA : <strong>${totalLiaison.toFixed(2)} €</strong></li>
+                        <li>CA : ${totalLiaison.toFixed(2)} €</li>
                         <li>Passagers : ${data.passagers.nombre}</li>
                         <li>Véhicules : ${data.vehicules.quantite}</li>
                     </ul>
