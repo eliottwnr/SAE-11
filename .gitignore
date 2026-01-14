@@ -1,4 +1,0 @@
-# Ignore tous les fichiers relatifs à .NET
-Cs/bin
-Cs/obj
-Cs.csproj

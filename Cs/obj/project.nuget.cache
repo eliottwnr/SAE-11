@@ -1,0 +1,13 @@
+{
+  "version": 2,
+  "dgSpecHash": "hk+kfKcKDzo=",
+  "success": true,
+  "projectFilePath": "/home/eliott/Cours/SAE/11/Cs/Cs.csproj",
+  "expectedPackageFiles": [
+    "/home/eliott/.nuget/packages/microsoft.netcore.app.runtime.linux-x64/9.0.11/microsoft.netcore.app.runtime.linux-x64.9.0.11.nupkg.sha512",
+    "/home/eliott/.nuget/packages/microsoft.aspnetcore.app.ref/9.0.11/microsoft.aspnetcore.app.ref.9.0.11.nupkg.sha512",
+    "/home/eliott/.nuget/packages/microsoft.aspnetcore.app.runtime.linux-x64/9.0.11/microsoft.aspnetcore.app.runtime.linux-x64.9.0.11.nupkg.sha512",
+    "/home/eliott/.nuget/packages/microsoft.netcore.app.host.linux-x64/9.0.11/microsoft.netcore.app.host.linux-x64.9.0.11.nupkg.sha512"
+  ],
+  "logs": []
+}

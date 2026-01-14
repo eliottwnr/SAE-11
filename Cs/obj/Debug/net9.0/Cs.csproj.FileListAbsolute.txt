@@ -1,0 +1,15 @@
+/home/eliott/Cours/SAE/11/Cs/bin/Debug/net9.0/Cs
+/home/eliott/Cours/SAE/11/Cs/bin/Debug/net9.0/Cs.deps.json
+/home/eliott/Cours/SAE/11/Cs/bin/Debug/net9.0/Cs.runtimeconfig.json
+/home/eliott/Cours/SAE/11/Cs/bin/Debug/net9.0/Cs.dll
+/home/eliott/Cours/SAE/11/Cs/bin/Debug/net9.0/Cs.pdb
+/home/eliott/Cours/SAE/11/Cs/obj/Debug/net9.0/Cs.GeneratedMSBuildEditorConfig.editorconfig
+/home/eliott/Cours/SAE/11/Cs/obj/Debug/net9.0/Cs.AssemblyInfoInputs.cache
+/home/eliott/Cours/SAE/11/Cs/obj/Debug/net9.0/Cs.AssemblyInfo.cs
+/home/eliott/Cours/SAE/11/Cs/obj/Debug/net9.0/Cs.csproj.CoreCompileInputs.cache
+/home/eliott/Cours/SAE/11/Cs/obj/Debug/net9.0/Cs.sourcelink.json
+/home/eliott/Cours/SAE/11/Cs/obj/Debug/net9.0/Cs.dll
+/home/eliott/Cours/SAE/11/Cs/obj/Debug/net9.0/refint/Cs.dll
+/home/eliott/Cours/SAE/11/Cs/obj/Debug/net9.0/Cs.pdb
+/home/eliott/Cours/SAE/11/Cs/obj/Debug/net9.0/Cs.genruntimeconfig.cache
+/home/eliott/Cours/SAE/11/Cs/obj/Debug/net9.0/ref/Cs.dll
