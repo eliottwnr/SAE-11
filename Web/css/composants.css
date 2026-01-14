@@ -6,12 +6,6 @@
   border-radius: 12px;
   padding: 12px;
   background: var(--bloc); 
-  transition: transform 0.4s, border-color 0.4s;
-}
-
-.carte:hover {
-  transform: translateY(-2px);
-  border-color: var(--accent);
 }
 
 .carte-entete {
@@ -89,14 +83,6 @@
   font-size: 0.85rem;
 }
 
-.couleur-ok { background: #083a1d; color: #86efac; }
-.couleur-avert { background: #3a2b08; color: #fde68a; }
-.couleur-alerte { background: #3a0f0f; color: #fecaca; }
-.couleur-neon { background: #303a00; color: var(--neon); }
-
-.barres { display: flex; flex-direction: column; gap: 6px; }
-.barre { display: flex; justify-content: space-between; }
-
 .formulaire-ligne {
   display: flex;
   gap: 8px;
@@ -141,7 +127,7 @@ Définition des largeurs des colonnes
 L'usage d'un display grid serait beaucoup plus simple et rapide mais il faut respecter les contraintes du sujet
 J'ai donc du chercher une solution avec flexbox sur internet et j'ai trouvé ça 
 L'implémentation n'était pas facile du tout, j'ai dû sollicité l'IA pour m'aider, qui a elle même eu du mal
-Maintenant ça fonctionne correctement, eu importe la taille de l'écran et du téléphone ça s'affichera comme il se doit
+Maintenant ça fonctionne correctement, peu importe la taille de l'écran et du téléphone ça s'affichera comme il se doit
 */
 .ligne > div { flex: 1; } 
 .ligne > div:nth-child(1) { flex: 0 0 15%; } 
@@ -157,11 +143,25 @@ Maintenant ça fonctionne correctement, eu importe la taille de l'écran et du t
     gap: 4px;
   }
 }
-.ligne.entete { border-bottom: 1px solid #1f2937; font-weight: 600; }
 
-.facture-totaux { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
-.totaux-ligne { display: flex; justify-content: space-between; }
-.totaux-ligne.important { font-size: 1.1rem; font-weight: 600; }
+.ligne.entete {
+   border-bottom: 1px solid #1f2937;
+   font-weight: 600;
+}
+
+.facture-totaux { display: flex;
+   flex-direction: column;
+   gap: 6px; 
+   margin-top: 8px; 
+}
+.totaux-ligne {
+   display: flex;
+   justify-content: space-between;
+}
+.totaux-ligne.important { 
+font-size: 1.1rem;
+font-weight: 600; 
+}
 
 .barres {
   display: flex;
@@ -187,6 +187,7 @@ Maintenant ça fonctionne correctement, eu importe la taille de l'écran et du t
   height: 100%;
 }
 
+/* pour ajouter les bonnes couleurs au tableau de bord selon remplissage*/
 .couleur-ok { background-color: var(--ok); }
 .couleur-avert { background-color: var(--avert); }
 .couleur-alerte { background-color: var(--alerte); }
@@ -197,8 +198,6 @@ Maintenant ça fonctionne correctement, eu importe la taille de l'écran et du t
     padding: 24px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
 }
-
-
 
 .carte-stat header {
     font-size: 1.2rem;
@@ -226,7 +225,7 @@ Maintenant ça fonctionne correctement, eu importe la taille de l'écran et du t
     border-bottom: 1px solid rgba(31, 41, 55, 0.5);
 }
 
-.carte-stat li:last-child {
+.carte-stat li:last-child { /* last-child le dernier enfant li n'a pas de bordure en dessous de lui */
     border-bottom: none;
 }
 
